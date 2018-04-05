@@ -41,6 +41,5 @@ export default function resourceReducer(
     break;
   }
 
-  console.log(newState);
   return newState;
 }
