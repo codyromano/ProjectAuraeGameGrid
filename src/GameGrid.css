@@ -1,0 +1,6 @@
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  border: solid;
+}

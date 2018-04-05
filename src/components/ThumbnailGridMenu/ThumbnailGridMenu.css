@@ -1,0 +1,10 @@
+.thumbnail-grid-menu {
+  display: flex;
+}
+.thumbnail-grid-menu-button {
+  max-width: 5rem;
+  cursor: pointer;
+}
+.thumbnail-grid-menu-image {
+  max-width: 100%;
+}

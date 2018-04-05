@@ -1,0 +1,7 @@
+.grid-tile {
+  position: relative;
+  cursor: pointer;
+}
+.grid-tile-selected {
+  /* opacity: 0.5; */
+}
