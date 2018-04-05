@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
 import './GameGridTile.css';
 
@@ -8,11 +9,18 @@ function coordsMatch(pairA, pairB) {
   return pairA.join('') === pairB.join('');
 }
 
+function gameGridComponentFactory(childComponentInfo) {
+  return (props) => (
+    <div>{childComponentInfo.title}</div>
+  );
+}
+
 // Just the view for a tile
 const GameGridTile = ({
   selectedCoords,
   coords,
   onGridTileSelected,
+  innerComponents,
   InnerContent,
   BaseContent,
   tileSize
@@ -33,7 +41,9 @@ const GameGridTile = ({
       className={classList.join(' ')}
       onClick={(event) => onGridTileSelected(coords)}
     >
-      <InnerContent coords={coords} />
+      {innerComponents.map((InnerComponent, i) => (
+        <InnerComponent key={i}/>
+      ))}
     </div>  
   );
 };
@@ -47,25 +57,26 @@ GameGridTile.propTypes = {
   selectedCoords: PropTypes.arrayOf(
     PropTypes.number
   ),
-  tileInnerContentMap: PropTypes.object.isRequired,
+
   onGridTileSelected: PropTypes.func.isRequired,
   coords: PropTypes.arrayOf(
     PropTypes.number
+  ).isRequired,
+
+  innerComponents: PropTypes.arrayOf(
+    PropTypes.func
   ).isRequired
-  /*
-  coords: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
-  }).isRequired
-  */
 };
 
-const mapStateToProps = (state) => {
-  console.log(state.currentTile.tileInnerContentMap);
+const mapStateToProps = (state, ownProps) => {
+  const locationKey = serializeGameObjectLocation(ownProps.coords);
+  const innerContentIds = state.resources.byPosition[locationKey] || [];
+  const innerComponents = innerContentIds
+    .map(id => gameGridComponentFactory(state.resources.byId[id]));
 
   return {
-    selectedCoords: state.currentTile.coords,
-    tileInnerContentMap: state.currentTile.tileInnerContentMap
+    innerComponents,
+    selectedCoords: state.currentTile.coords
   };
 };
 

@@ -21,6 +21,9 @@ const tileSelectedReducer = (
       const contentKey = serializeGameObjectLocation(x, y);
       newState.tileInnerContentMap[contentKey] = action.resource;
     break;
+
+    default:
+    break;
   }
   return newState;
 };
