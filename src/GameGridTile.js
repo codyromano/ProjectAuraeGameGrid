@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Card, CardHeader} from 'material-ui/Card';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
 import './GameGridTile.css';
@@ -36,15 +37,17 @@ const GameGridTile = ({
   }
 
   return (
-    <div
-      style={{ height: tileSize, width: tileSize }}
-      className={classList.join(' ')}
-      onClick={(event) => onGridTileSelected(coords)}
-    >
-      {innerComponents.map((InnerComponent, i) => (
-        <InnerComponent key={i}/>
-      ))}
-    </div>  
+    <Card raised={"true"}>
+      <div
+        style={{ height: tileSize, width: tileSize }}
+        className={classList.join(' ')}
+        onClick={(event) => onGridTileSelected(coords)}
+      >
+        {innerComponents.map((InnerComponent, i) => (
+          <InnerComponent key={i}/>
+        ))}
+      </div>
+    </Card>
   );
 };
 

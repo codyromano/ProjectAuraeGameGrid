@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+
+// Material UI
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {deepOrange500} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import { TILE_SELECTED } from '../../store/actions';
 import ThumbnailGridMenu from '../ThumbnailGridMenu';
 import GameGrid from '../../GameGrid';
@@ -26,6 +32,12 @@ function mapPlainObject(object, mapFn) {
   return newObject;
 }
 
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  }
+});
+
 
 // TODO: Rename "App" to "ViewGarden"
 class App extends React.Component {
@@ -48,17 +60,19 @@ class App extends React.Component {
     );
 
     return (
-      <main>
-        <h1>Select an empty tile to plant something</h1>
-        <GameGrid
-          defaultTileInnerContent={GrassTile}
-          onGridTileSelected={this.onGridTileSelected}
-          tileInnerContentMap={tileInnerContentMap}
-          tileSize={5}
-          width={6}
-          height={6}
-        />
-      </main>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <h1>Select an empty tile to plant something</h1>
+          <GameGrid
+            defaultTileInnerContent={GrassTile}
+            onGridTileSelected={this.onGridTileSelected}
+            tileInnerContentMap={tileInnerContentMap}
+            tileSize={5}
+            width={6}
+            height={6}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
