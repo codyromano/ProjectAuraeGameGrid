@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardHeader} from 'material-ui/Card';
+import LinearProgress from 'material-ui/LinearProgress';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
 import './GameGridTile.css';
@@ -11,8 +12,22 @@ function coordsMatch(pairA, pairB) {
 }
 
 function gameGridComponentFactory(childComponentInfo) {
+  const inlineStyle = { maxWidth: '100%' };
+
+  // TODO: Source water dynamically from IRL weather events
+  const WATER_PROGRESS_VALUE = 50;
+
   return (props) => (
-    <div>{childComponentInfo.title}</div>
+    <div>
+      <LinearProgress
+        thickness={10}
+        max={100}
+        min={0}
+        value={WATER_PROGRESS_VALUE}
+        mode={'determinate'}
+      />
+      <img style={inlineStyle} src={childComponentInfo.imageSrc} />
+    </div>
   );
 }
 
