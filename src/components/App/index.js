@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 // Material UI
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {deepOrange500} from 'material-ui/styles/colors';
+import { deepOrange500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
 
 import GameGrid from '../../GameGrid';
 import GrassTile from '../../GrassTile';
@@ -15,6 +16,8 @@ import './App.css';
 import { tileSelected } from '../../store/actions';
 
 import { PageWidthContainer } from '../layout';
+import TabsMenu from '../navigation/TabsMenu';
+import tabsMenuConfig from '../../config/tabsMenuConfig';
 
 const createTileResourceComponent = ({ imageSrc }) => (props) => (
   <div>
@@ -63,19 +66,24 @@ class App extends React.Component {
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <PageWidthContainer>
-          <div>
-            <h1>Select an empty tile to plant something</h1>
-            <GameGrid
-              defaultTileInnerContent={GrassTile}
-              onGridTileSelected={this.onGridTileSelected}
-              tileInnerContentMap={tileInnerContentMap}
-              tileSize={5}
-              width={6}
-              height={6}
-            />
-          </div>
-        </PageWidthContainer>
+        <main>
+          <Paper>
+            <TabsMenu tabs={tabsMenuConfig} />
+          </Paper>
+          <PageWidthContainer>
+            <div>
+              <h1>Select an empty tile to plant something</h1>
+              <GameGrid
+                defaultTileInnerContent={GrassTile}
+                onGridTileSelected={this.onGridTileSelected}
+                tileInnerContentMap={tileInnerContentMap}
+                tileSize={5}
+                width={6}
+                height={6}
+              />
+            </div>
+          </PageWidthContainer>
+        </main>
       </MuiThemeProvider>
     );
   }
