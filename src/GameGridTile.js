@@ -15,7 +15,7 @@ function gameGridComponentFactory(childComponentInfo) {
   const inlineStyle = { maxWidth: '100%' };
 
   // TODO: Source water dynamically from IRL weather events
-  const WATER_PROGRESS_VALUE = 50;
+  const WATER_PROGRESS_VALUE = 0;
 
   return (props) => (
     <div>

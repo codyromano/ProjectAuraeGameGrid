@@ -14,6 +14,8 @@ import { routerRedirector } from '../../routes';
 import './App.css';
 import { tileSelected } from '../../store/actions';
 
+import { PageWidthContainer } from '../layout';
+
 const createTileResourceComponent = ({ imageSrc }) => (props) => (
   <div>
     <img
@@ -39,7 +41,6 @@ const muiTheme = getMuiTheme({
   }
 });
 
-
 // TODO: Rename "App" to "ViewGarden"
 class App extends React.Component {
   constructor(props) {
@@ -62,17 +63,19 @@ class App extends React.Component {
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <h1>Select an empty tile to plant something</h1>
-          <GameGrid
-            defaultTileInnerContent={GrassTile}
-            onGridTileSelected={this.onGridTileSelected}
-            tileInnerContentMap={tileInnerContentMap}
-            tileSize={5}
-            width={6}
-            height={6}
-          />
-        </div>
+        <PageWidthContainer>
+          <div>
+            <h1>Select an empty tile to plant something</h1>
+            <GameGrid
+              defaultTileInnerContent={GrassTile}
+              onGridTileSelected={this.onGridTileSelected}
+              tileInnerContentMap={tileInnerContentMap}
+              tileSize={5}
+              width={6}
+              height={6}
+            />
+          </div>
+        </PageWidthContainer>
       </MuiThemeProvider>
     );
   }

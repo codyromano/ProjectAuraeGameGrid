@@ -7,6 +7,8 @@ import ThumbnailGridMenu from '../../ThumbnailGridMenu';
 import { routePaths } from '../../../routes';
 import { withRouter } from 'react-router';
 
+import { PageWidthContainer } from '../../layout';
+
 class PlaceTileResource extends React.Component {
   constructor(props) {
     super(props);
@@ -17,12 +19,12 @@ class PlaceTileResource extends React.Component {
     this.props.history.push(routePaths.VIEW_GARDEN);
   }
   render() {
-    return (<div>
+    return (<PageWidthContainer>
       <h1>Choose a plant</h1>
       <ThumbnailGridMenu
         onSelect={this.onSelect}
       />
-    </div>);
+    </PageWidthContainer>);
   }
 }
 
