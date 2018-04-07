@@ -1,5 +1,5 @@
 import uniqid from 'uniqid';
-import { RESOURCE_ACQUIRED, CLASS_PLANT } from '../actions';
+import { RESOURCE_ACQUIRED } from '../actions';
 import { serializeGameObjectLocation } from '../gameDataUtils';
 
 const initialState = {
@@ -7,12 +7,6 @@ const initialState = {
   byClass: {},
   byPosition: {},
   allIds: []
-};
-
-const resourceAcquisitionReducers = {
-  [CLASS_PLANT]: (state, action) => {
-    return state;
-  }
 };
 
 export default function resourceReducer(
@@ -38,6 +32,8 @@ export default function resourceReducer(
       // Reducer logic specific to the given resource class
       // const resourceReducer = resourceAcquisitionReducers[action.class];
       // newState = resourceReducer(newState, action);
+    break;
+    default:
     break;
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Card, CardHeader} from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import LinearProgress from 'material-ui/LinearProgress';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
@@ -26,7 +26,10 @@ function gameGridComponentFactory(childComponentInfo) {
         value={WATER_PROGRESS_VALUE}
         mode={'determinate'}
       />
-      <img style={inlineStyle} src={childComponentInfo.imageSrc} />
+      <img
+        alt={`Game resource`}
+        style={inlineStyle}
+        src={childComponentInfo.imageSrc} />
     </div>
   );
 }

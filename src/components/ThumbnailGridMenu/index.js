@@ -11,7 +11,9 @@ const ThumbnailGridMenu = ({
     {items.map(item => (
       <button key={item.title} className="thumbnail-grid-menu-button"
         onClick={() => onSelect(item)}>
-        <img className="thumbnail-grid-menu-image"
+        <img
+          alt={item.title}
+          className="thumbnail-grid-menu-image"
           src={item.imageSrc} />
         {item.title}
       </button>

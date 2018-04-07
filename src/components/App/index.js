@@ -8,8 +8,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { TILE_SELECTED } from '../../store/actions';
-import ThumbnailGridMenu from '../ThumbnailGridMenu';
 import GameGrid from '../../GameGrid';
 import GrassTile from '../../GrassTile';
 import { routerRedirector } from '../../routes';
@@ -18,7 +16,10 @@ import { tileSelected } from '../../store/actions';
 
 const createTileResourceComponent = ({ imageSrc }) => (props) => (
   <div>
-    <img style={{maxWidth: '100%'}} src={imageSrc} />
+    <img
+      alt="Tile resource"
+      style={{maxWidth: '100%'}}
+      src={imageSrc} />
   </div>
 );
 
