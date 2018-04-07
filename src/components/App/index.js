@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-// Material UI
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { deepOrange500 } from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
+import { MaterialUIProvider } from '../layout';
 
 import GameGrid from '../../GameGrid';
 import GrassTile from '../../GrassTile';
@@ -38,12 +35,6 @@ function mapPlainObject(object, mapFn) {
   return newObject;
 }
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  }
-});
-
 // TODO: Rename "App" to "ViewGarden"
 class App extends React.Component {
   constructor(props) {
@@ -65,7 +56,7 @@ class App extends React.Component {
     );
 
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MaterialUIProvider>
         <main>
           <Paper>
             <TabsMenu tabs={tabsMenuConfig} />
@@ -84,7 +75,7 @@ class App extends React.Component {
             </div>
           </PageWidthContainer>
         </main>
-      </MuiThemeProvider>
+      </MaterialUIProvider>
     );
   }
 }

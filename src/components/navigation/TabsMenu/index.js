@@ -54,4 +54,6 @@ TabsMenu.propTypes = {
   ).isRequired
 };
 
+// Export without HOC for testing
+export const TabsMenuBase = TabsMenu;
 export default withRouter(TabsMenu);
