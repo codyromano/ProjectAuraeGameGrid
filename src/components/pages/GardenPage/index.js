@@ -13,6 +13,7 @@ import { routerRedirector } from '../../../routes';
 import './GardenPage.css';
 import { tileSelected } from '../../../store/actions';
 import { PageWidthContainer } from '../../layout';
+import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
 const createTileResourceComponent = ({ imageSrc }) => (props) => (
   <div>
@@ -53,7 +54,7 @@ class GardenPage extends React.Component {
     );
 
     return (
-      <BasePage>
+      <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
           <h1>Select an empty tile to plant something</h1>
           <GameGrid

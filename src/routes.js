@@ -1,4 +1,5 @@
 export const routePaths = {
+  WEATHER_PAGE: '/weather',
   PLACE_RESOURCE: '/place',
   VIEW_GARDEN: '/'
 };

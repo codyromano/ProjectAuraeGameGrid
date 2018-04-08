@@ -26,7 +26,7 @@ const defaultMockHistory = ({
 const createMockTestTabs = (mockHistory = defaultMockHistory) => 
   mount(
     <TestContext>
-      <TabsMenuBase history={mockHistory} tabs={tabsInfo} />
+      <TabsMenuBase selectedTabId={'weather'} history={mockHistory} tabs={tabsInfo} />
     </TestContext>
   );
 

@@ -19,20 +19,20 @@ class TabsMenu extends React.Component {
         onChange={this.onChange}
       >
       {this.props.tabs.map(tab => (
-        <Tab
-          label={tab.label}
-          value={tab.value || tab.pathname}
-          key={tab.pathname}
-          selected={this.props.isSelectedTab(tab)}
-        />
-      ))}
+          <Tab
+            label={tab.label}
+            value={tab.value || tab.pathname}
+            key={tab.pathname}
+            selected={tab.id === this.props.selectedTabId}
+          />
+        )
+      )}
       </Tabs>
     );
   }
 }
 
 TabsMenu.defaultProps = {
-  isSelectedTab: (tab) => window.location.pathname.includes(tab.pathname),
   onChange: () => {}
 };
 
@@ -45,8 +45,11 @@ TabsMenu.propTypes = {
     push: PropTypes.func,
   }).isRequired,
 
+  selectedTabId: PropTypes.string.isRequired,
+
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       pathname: PropTypes.string.isRequired,
       value: PropTypes.string,
       label: PropTypes.string.isRequired

@@ -13,10 +13,7 @@ export const PageWidthContainer = ({ children }) => (
 );
 
 PageWidthContainer.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.func),
-    PropTypes.object
-  ]).isRequired
+  children: PropTypes.node.isRequired
 };
 
 // Export material UI provider with standard configuration

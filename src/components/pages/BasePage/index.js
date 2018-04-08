@@ -15,7 +15,10 @@ export default class BasePage extends React.Component {
       <MaterialUIProvider>
         <main>
           <Paper>
-            <TabsMenu tabs={tabsMenuConfig} />
+            <TabsMenu
+              tabs={tabsMenuConfig}
+              selectedTabId={this.props.selectedTabId}
+            />
           </Paper>
           <section className="base-page-content">
             {this.props.children}
@@ -27,8 +30,5 @@ export default class BasePage extends React.Component {
 }
 
 BasePage.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.arrayOf(PropTypes.func)
-  ]).isRequired
+  selectedTabId: PropTypes.string.isRequired
 };
