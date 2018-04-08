@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import Paper from 'material-ui/Paper';
-import { MaterialUIProvider } from '../layout';
+import BasePage from '../BasePage';
 
-import GameGrid from '../../GameGrid';
-import GrassTile from '../../GrassTile';
-import { routerRedirector } from '../../routes';
-import './App.css';
-import { tileSelected } from '../../store/actions';
+import GameGrid from '../../../GameGrid';
+import GrassTile from '../../../GrassTile';
 
-import { PageWidthContainer } from '../layout';
-import TabsMenu from '../navigation/TabsMenu';
-import tabsMenuConfig from '../../config/tabsMenuConfig';
+import { routerRedirector } from '../../../routes';
+
+import './GardenPage.css';
+import { tileSelected } from '../../../store/actions';
+import { PageWidthContainer } from '../../layout';
 
 const createTileResourceComponent = ({ imageSrc }) => (props) => (
   <div>
@@ -35,8 +33,7 @@ function mapPlainObject(object, mapFn) {
   return newObject;
 }
 
-// TODO: Rename "App" to "ViewGarden"
-class App extends React.Component {
+class GardenPage extends React.Component {
   constructor(props) {
     super(props);
     this.onGridTileSelected = this.onGridTileSelected.bind(this);
@@ -56,31 +53,24 @@ class App extends React.Component {
     );
 
     return (
-      <MaterialUIProvider>
-        <main>
-          <Paper>
-            <TabsMenu tabs={tabsMenuConfig} />
-          </Paper>
-          <PageWidthContainer>
-            <div>
-              <h1>Select an empty tile to plant something</h1>
-              <GameGrid
-                defaultTileInnerContent={GrassTile}
-                onGridTileSelected={this.onGridTileSelected}
-                tileInnerContentMap={tileInnerContentMap}
-                tileSize={5}
-                width={6}
-                height={6}
-              />
-            </div>
-          </PageWidthContainer>
-        </main>
-      </MaterialUIProvider>
+      <BasePage>
+        <PageWidthContainer>
+          <h1>Select an empty tile to plant something</h1>
+          <GameGrid
+            defaultTileInnerContent={GrassTile}
+            onGridTileSelected={this.onGridTileSelected}
+            tileInnerContentMap={tileInnerContentMap}
+            tileSize={5}
+            width={6}
+            height={6}
+          />
+        </PageWidthContainer>
+      </BasePage>
     );
   }
 }
 
-App.propTypes = {
+GardenPage.propTypes = {
   history: PropTypes.object.isRequired,
   tileInnerContentMap: PropTypes.objectOf(
     PropTypes.shape({
@@ -89,7 +79,7 @@ App.propTypes = {
   )
 };
 
-App.contextTypes = {
+GardenPage.contextTypes = {
   // TODO: Specify object
   store: PropTypes.object.isRequired
 };
@@ -102,5 +92,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({});
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(App)
+  connect(mapStateToProps, mapDispatchToProps)(GardenPage)
 );
