@@ -22,9 +22,6 @@ class TabsMenu extends React.Component {
     return this.props.tabs[selectedTabIndex].pathname;
   }
   render() {
-    const selectedTabValue = this.props.tabs.findIndex(
-      tab => tab.id === this.props.selectedTabId
-    );
     const tabs = this.props.tabs.map(tab => (
       <Tab
         label={tab.label}
