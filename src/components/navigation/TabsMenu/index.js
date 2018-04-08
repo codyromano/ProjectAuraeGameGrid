@@ -11,22 +11,36 @@ class TabsMenu extends React.Component {
   onChange(tabPathname) {
     this.props.history.push(tabPathname);
   }
+  // https://material-ui-next.com/api/tabs/
+  getSelectedTabPathname() {
+    const selectedTabIndex = this.props.tabs.findIndex(
+      tab => tab.id === this.props.selectedTabId
+    );
+    if (selectedTabIndex === -1) {
+      return false;
+    }
+    return this.props.tabs[selectedTabIndex].pathname;
+  }
   render() {
+    const selectedTabValue = this.props.tabs.findIndex(
+      tab => tab.id === this.props.selectedTabId
+    );
+    const tabs = this.props.tabs.map(tab => (
+      <Tab
+        label={tab.label}
+        value={tab.pathname}
+        key={tab.pathname}
+      />
+    ));
+
     return (
       <Tabs
         indicatorcolor="primary"
         textcolor="primary"
         onChange={this.onChange}
+        value={this.getSelectedTabPathname()}
       >
-      {this.props.tabs.map(tab => (
-          <Tab
-            label={tab.label}
-            value={tab.value || tab.pathname}
-            key={tab.pathname}
-            selected={tab.id === this.props.selectedTabId}
-          />
-        )
-      )}
+        {tabs}
       </Tabs>
     );
   }
