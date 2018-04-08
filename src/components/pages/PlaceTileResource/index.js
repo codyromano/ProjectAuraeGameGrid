@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { plantResourceAcquired } from '../../../store/actions';
 import ThumbnailGridMenu from '../../ThumbnailGridMenu';
+import BasePage from '../BasePage';
 import { routePaths } from '../../../routes';
 import { withRouter } from 'react-router';
 
@@ -19,12 +20,16 @@ class PlaceTileResource extends React.Component {
     this.props.history.push(routePaths.VIEW_GARDEN);
   }
   render() {
-    return (<PageWidthContainer>
-      <h1>Choose a plant</h1>
-      <ThumbnailGridMenu
-        onSelect={this.onSelect}
-      />
-    </PageWidthContainer>);
+    return (
+      <BasePage>
+        <PageWidthContainer>
+          <h1>Choose a plant</h1>
+          <ThumbnailGridMenu
+            onSelect={this.onSelect}
+          />
+        </PageWidthContainer>
+      </BasePage>
+    );
   }
 }
 
