@@ -3,6 +3,11 @@
 Prototype for core gameplay
 
 ## Getting started
+
+First set up the [simple-weather-service](https://github.com/codyromano/simple-weather-service), which provides current weather data.
+
+After you have the service running, run this repo, which focuses on the UI:
+
 ```
 npm install
 npm start
