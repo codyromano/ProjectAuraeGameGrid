@@ -88,6 +88,7 @@ GameGrid.propTypes = {
 };
 
 GameGrid.contextTypes = {
+  // TODO: Don't statically reference the store
   // TODO: Define shape specifically
   store: PropTypes.object.isRequired
 };

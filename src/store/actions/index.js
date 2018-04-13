@@ -1,7 +1,9 @@
 // Actions
+// TODO: Use enum
 export const TILE_SELECTED = 'tileSelected';
 export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
 export const RESOURCE_ACQUIRED = 'acquired';
+export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
 // TODO: Move to game object class def file
 export const CLASS_PLANT = 'plant';
@@ -9,6 +11,11 @@ export const CLASS_PLANT = 'plant';
 export const tileSelected = (coords) => ({
   type: TILE_SELECTED,
   coords
+});
+
+export const weatherDataFetched = (serverResponse) => ({
+  type: WEATHER_DATA_FETCHED,
+  weatherData: serverResponse
 });
 
 export const plantResourceAcquired = (resource, selectedCoords) => {
