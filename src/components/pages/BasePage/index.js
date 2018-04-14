@@ -8,16 +8,14 @@ import './BasePage.css';
 
 import TabsMenu from '../../navigation/TabsMenu';
 import tabsMenuConfig from '../../../config/tabsMenuConfig';
+import { GET_CURRENT_WEATHER } from '../../../config/endpoints';
 import { weatherDataFetched } from '../../../store/actions';
 import ReduxFetch from '../../data-providers/ReduxFetch';
-
-// TODO: Move to network settings in /config
-const endpoint = 'http://localhost:8000/weather/seattle';
 
 export default class BasePage extends React.Component {
   render() {
     return (
-      <ReduxFetch endpoint={endpoint} actionCreator={weatherDataFetched}>
+      <ReduxFetch endpoint={GET_CURRENT_WEATHER} actionCreator={weatherDataFetched}>
         <MaterialUIProvider>
           <main>
             <Paper>
