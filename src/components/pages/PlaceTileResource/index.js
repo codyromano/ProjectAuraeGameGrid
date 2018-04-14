@@ -9,6 +9,7 @@ import { routePaths } from '../../../routes';
 import { withRouter } from 'react-router';
 
 import { PageWidthContainer } from '../../layout';
+import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
 class PlaceTileResource extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class PlaceTileResource extends React.Component {
   }
   render() {
     return (
-      <BasePage>
+      <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
           <h1>Choose a plant</h1>
           <ThumbnailGridMenu
