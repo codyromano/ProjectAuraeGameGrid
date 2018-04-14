@@ -23,7 +23,7 @@ function gameGridComponentFactory(childComponentInfo) {
         thickness={10}
         max={100}
         min={0}
-        value={WATER_PROGRESS_VALUE}
+        value={childComponentInfo.waterLevel}
         mode={'determinate'}
       />
       <img

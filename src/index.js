@@ -8,7 +8,10 @@ import { createStore } from 'redux';
 import primaryReducer from './store/reducers/primaryReducer';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-const store = createStore(primaryReducer);
+const store = createStore(
+  primaryReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 // TODO: Generate route hierarchy from config file
 render(

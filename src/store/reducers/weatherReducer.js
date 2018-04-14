@@ -26,8 +26,6 @@ export default function weatherReducer(state = initialState, action) {
   const newState = {...state};
   const latestWeatherData = action.weatherData.data.list.slice(-1)[0];
 
-  console.log(action.weatherData);
-
   newState.byId['rain'].volumeLastThreeHours = latestWeatherData.rain['3h'];
   newState.summary.description = latestWeatherData.weather.slice(-1)[0].description;
 

@@ -1,5 +1,10 @@
 import uniqid from 'uniqid';
-import { RESOURCE_ACQUIRED } from '../actions';
+import clone from 'clone';
+import {
+  CLASS_PLANT,
+  RESOURCE_ACQUIRED,
+  WEATHER_DATA_FETCHED
+} from '../actions';
 import { serializeGameObjectLocation } from '../gameDataUtils';
 
 const initialState = {
@@ -9,29 +14,40 @@ const initialState = {
   allIds: []
 };
 
+const initialAttributes = {
+  [CLASS_PLANT]: {
+    // TODO: This should be 0
+    waterLevel: 50
+  }
+};
+
 export default function resourceReducer(
   state = initialState,
   action = {}
 ) {
-  let newState = {...state};
+  let newState = clone(state);
+  const actionCopy = clone(action);
 
   switch (action.type) {
     case RESOURCE_ACQUIRED:
       const id = uniqid();
-      newState.byId[id] = action.resource;
+      newState.byId[id] = Object.assign(
+        actionCopy.resource,
+        initialAttributes[actionCopy.class]
+      );
+
       newState.allIds.push(id);
 
-      newState.byClass[action.class] = newState.byClass[action.class] || [];
-      newState.byClass[action.class].push(id);
+      newState.byClass[actionCopy.class] = newState.byClass[actionCopy.class] || [];
+      newState.byClass[actionCopy.class].push(id);
 
-      const mapLocationKey = serializeGameObjectLocation(action.selectedCoords);
+      const mapLocationKey = serializeGameObjectLocation(actionCopy.selectedCoords);
       newState.byPosition[mapLocationKey] = newState.byPosition[mapLocationKey] || [];
       newState.byPosition[mapLocationKey].push(id);
       
-      // TODO: Uncomment if you need logic specific to resource class
-      // Reducer logic specific to the given resource class
-      // const resourceReducer = resourceAcquisitionReducers[action.class];
-      // newState = resourceReducer(newState, action);
+    break;
+    case WEATHER_DATA_FETCHED:
+
     break;
     default:
     break;
