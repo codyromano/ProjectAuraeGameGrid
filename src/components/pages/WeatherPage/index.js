@@ -10,6 +10,7 @@ import BasePage from '../BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_WEATHER } from '../../../config/tabsMenuConfig';
 import { FETCH_FAIL } from '../../../store/reducers/weatherReducer';
+import { currencyResourceAcquired } from '../../../store/actions';
 
 // TODO: Move to a more general modules file and improve design
 const Warning = ({ children }) => (
@@ -42,6 +43,10 @@ class WeatherPage extends React.Component {
 
               <CardActions>
                 <RaisedButton
+                  onClick={() => this.props.currencyResourceAcquired(
+                    card.id,
+                    card.intensity
+                  )}
                   primary={true}
                   label={`Collect ${card.noun} (${card.intensity}ml)`}
                   fullWidth={true}
@@ -56,6 +61,7 @@ class WeatherPage extends React.Component {
 }
 
 WeatherPage.propTypes = {
+  currencyResourceAcquired: PropTypes.func.isRequired,
   description: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired
 };
@@ -70,7 +76,12 @@ const mapStateToProps = (state) => {
     description: state.weather.summary.description
   }
 };
-const mapDispatchToProps = (dispatch) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  currencyResourceAcquired: (weatherType, amount) => dispatch(
+    currencyResourceAcquired(weatherType, amount)
+  )
+});
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(WeatherPage)

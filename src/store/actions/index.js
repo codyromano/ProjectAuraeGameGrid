@@ -7,6 +7,7 @@ export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
 // TODO: Move to game object class def file
 export const CLASS_PLANT = 'plant';
+export const CLASS_CURRENCY = 'currency';
 
 export const tileSelected = (coords) => ({
   type: TILE_SELECTED,
@@ -16,6 +17,15 @@ export const tileSelected = (coords) => ({
 export const weatherDataFetched = (serverResponse) => ({
   type: WEATHER_DATA_FETCHED,
   weatherData: serverResponse
+});
+
+export const currencyResourceAcquired = (name, amount) => ({
+  type: RESOURCE_ACQUIRED,
+  class: CLASS_CURRENCY,
+  resource: {
+    name,
+    amount
+  }
 });
 
 export const plantResourceAcquired = (resource, selectedCoords) => {

@@ -2,22 +2,15 @@ import uniqid from 'uniqid';
 import clone from 'clone';
 import {
   CLASS_PLANT,
-  RESOURCE_ACQUIRED,
-  WEATHER_DATA_FETCHED
+  RESOURCE_ACQUIRED
 } from '../actions';
-import { serializeGameObjectLocation } from '../gameDataUtils';
+import { resourceHandlerFactory } from './resource-handlers';
 
 const initialState = {
   byId: {},
   byClass: {},
   byPosition: {},
   allIds: []
-};
-
-const initialAttributes = {
-  [CLASS_PLANT]: {
-    waterLevel: 0
-  }
 };
 
 export default function resourceReducer(
@@ -30,22 +23,16 @@ export default function resourceReducer(
   switch (action.type) {
     case RESOURCE_ACQUIRED:
       const id = uniqid();
-      newState.byId[id] = Object.assign(
-        actionCopy.resource,
-        initialAttributes[actionCopy.class]
-      );
+
+      newState.byId[id] = actionCopy.resource;
+      newState.byId[id].class = actionCopy.class;
 
       newState.allIds.push(id);
-
       newState.byClass[actionCopy.class] = newState.byClass[actionCopy.class] || [];
       newState.byClass[actionCopy.class].push(id);
 
-      const mapLocationKey = serializeGameObjectLocation(actionCopy.selectedCoords);
-      newState.byPosition[mapLocationKey] = newState.byPosition[mapLocationKey] || [];
-      newState.byPosition[mapLocationKey].push(id);
-
-    break;
-    case WEATHER_DATA_FETCHED:
+      const applyResourceClassLogic = resourceHandlerFactory(actionCopy.class, id);
+      newState = applyResourceClassLogic(newState, actionCopy);
 
     break;
     default:

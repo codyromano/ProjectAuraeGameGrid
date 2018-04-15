@@ -15,6 +15,7 @@ const initialState = {
   },
   byId: {
     rain: {
+      id: 'water',
       isCurrentWeatherCondition: false,
       intensity: 0,
       intensityDescriptor: '{intensity}ml per hour',
