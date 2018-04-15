@@ -16,8 +16,7 @@ const initialState = {
 
 const initialAttributes = {
   [CLASS_PLANT]: {
-    // TODO: This should be 0
-    waterLevel: 50
+    waterLevel: 0
   }
 };
 
@@ -44,7 +43,7 @@ export default function resourceReducer(
       const mapLocationKey = serializeGameObjectLocation(actionCopy.selectedCoords);
       newState.byPosition[mapLocationKey] = newState.byPosition[mapLocationKey] || [];
       newState.byPosition[mapLocationKey].push(id);
-      
+
     break;
     case WEATHER_DATA_FETCHED:
 
