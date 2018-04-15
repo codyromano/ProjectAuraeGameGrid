@@ -7,7 +7,7 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export const PageWidthContainer = ({ children }) => (
-  <div style={{ maxWidth: '30rem', margin: '0 auto' }}>
+  <div style={{ maxWidth: '30rem', padding: '0 1rem', margin: '0 auto' }}>
     {children}
   </div>
 );

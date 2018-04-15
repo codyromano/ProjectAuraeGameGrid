@@ -29,9 +29,7 @@ class WeatherPage extends React.Component {
           </Warning>)}
 
           <PageWidthContainer>
-            <h1>Description: {this.props.description}</h1>
-            <h2>Rain volume: {this.props.rainVolume} (past 3 hours)</h2>
-
+            <h1>{this.props.description}</h1>
 
             <Paper>
               <GridList>
