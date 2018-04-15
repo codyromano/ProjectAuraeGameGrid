@@ -11,7 +11,7 @@ import GrassTile from '../../../GrassTile';
 import { routerRedirector } from '../../../routes';
 
 import './GardenPage.css';
-import { tileSelected } from '../../../store/actions';
+import { CLASS_PLANT, tileSelected } from '../../../store/actions';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
@@ -56,6 +56,8 @@ class GardenPage extends React.Component {
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
+          <h1>{this.props.headerText}</h1>
+
           <GameGrid
             defaultTileInnerContent={GrassTile}
             onGridTileSelected={this.onGridTileSelected}
@@ -85,8 +87,18 @@ GardenPage.contextTypes = {
 };
 
 const mapStateToProps = (state) => {
+  const { tileInnerContentMap } = state.currentTile;
+
+  let hasPlants = false;
+
+  if (state.resources.byClass[CLASS_PLANT]) {
+    hasPlants = Object.keys(state.resources.byClass[CLASS_PLANT]).length > 0;
+  }
+
   return {
-    tileInnerContentMap: state.currentTile.tileInnerContentMap
+    headerText: hasPlants ?
+      'Select a plant to make it grow' : 'Tap a tile to plant something',
+    tileInnerContentMap: tileInnerContentMap
   };
 };
 const mapDispatchToProps = (dispatch) => ({});
