@@ -11,6 +11,7 @@ import tabsMenuConfig from '../../../config/tabsMenuConfig';
 import { GET_CURRENT_WEATHER } from '../../../config/endpoints';
 import { weatherDataFetched } from '../../../store/actions';
 import ReduxFetch from '../../data-providers/ReduxFetch';
+import CurrencyDisplay from '../../resources/CurrencyDisplay';
 
 export default class BasePage extends React.Component {
   render() {
@@ -27,6 +28,9 @@ export default class BasePage extends React.Component {
             <section className="basePageContent">
               {this.props.children}
             </section>
+            <footer>
+              <CurrencyDisplay />
+            </footer>
           </main>
         </MaterialUIProvider>
       </ReduxFetch>
