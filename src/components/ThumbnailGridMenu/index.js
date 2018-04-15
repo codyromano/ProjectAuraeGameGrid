@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ThumbnailGridMenu.css';
-import { GridList, GridTile } from 'material-ui/GridList';
+import GridList, { GridListTile } from 'material-ui/GridList';
 
 const ThumbnailGridMenu = ({
   items,
@@ -10,14 +10,14 @@ const ThumbnailGridMenu = ({
 }) => (
   <GridList>
     {items.map(item => (
-      <GridTile
+      <GridListTile
         style={{ cursor: 'pointer' }}
         onClick={() => onSelect(item)}
         key={item.title}
         title={item.title}
       >
           <img src={item.imageSrc} alt={item.title} />
-      </GridTile>
+      </GridListTile>
     ))}
   </GridList>
 );

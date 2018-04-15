@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Card } from 'material-ui/Card';
-import LinearProgress from 'material-ui/LinearProgress';
+import Card from 'material-ui/Card';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
 import './GameGridTile.css';
@@ -16,13 +15,6 @@ function gameGridComponentFactory(childComponentInfo) {
 
   return (props) => (
     <div>
-      <LinearProgress
-        thickness={10}
-        max={100}
-        min={0}
-        value={childComponentInfo.waterLevel}
-        mode={'determinate'}
-      />
       <img
         alt={`Game resource`}
         style={inlineStyle}
@@ -52,7 +44,7 @@ const GameGridTile = ({
   }
 
   return (
-    <Card raised={"true"}>
+    <Card raised={true}>
       <div
         style={{ height: tileSize, width: tileSize }}
         className={classList.join(' ')}

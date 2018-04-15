@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { deepOrange500 } from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import createMuiTheme from 'material-ui/styles/createMuiTheme'
+import { amber, blueGrey } from 'material-ui/colors'
+import createPalette from 'material-ui/styles/createPalette'
 
 export const PageWidthContainer = ({ children }) => (
   <div style={{ maxWidth: '30rem', padding: '0 1rem', margin: '0 auto' }}>
@@ -18,14 +19,18 @@ PageWidthContainer.propTypes = {
 
 // Export material UI provider with standard configuration
 // for use in App as well as tests, which require it for React context
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  }
+const muiTheme = createMuiTheme({
+  palette: createPalette({
+    primary: blueGrey,
+    accent: blueGrey,
+    // accent1Color: blueGrey,
+    error: amber,
+    type: 'light'
+  })
 });
 
 export const MaterialUIProvider = ({ children }) => (
-  <MuiThemeProvider muiTheme={muiTheme}>
+  <MuiThemeProvider theme={muiTheme}>
     {children}
   </MuiThemeProvider>
 );

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import Card, { CardActions, CardText, CardHeader } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Avatar from 'material-ui/Avatar';
 
+import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import BasePage from '../BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_WEATHER } from '../../../config/tabsMenuConfig';
@@ -34,23 +35,26 @@ class WeatherPage extends React.Component {
                 <CardHeader
                   title={card.title}
                   subtitle={`${card.intensityDescriptor}`}
-                  avatar={card.imageSrc}
+                  avatar={<Avatar src={card.imageSrc} />}
                 />
 
-              <CardText>
+              <CardContent>
               {card.description}
-              </CardText>
+              </CardContent>
 
               <CardActions>
-                <RaisedButton
+                <Button
+                  variant="raised"
+                  color="primary"
                   onClick={() => this.props.currencyResourceAcquired(
                     card.id,
                     card.intensity
                   )}
-                  primary={true}
                   label={`Collect ${card.noun} (${card.intensity}ml)`}
                   fullWidth={true}
-                />
+                >
+                  Collect {card.noun} ({card.intensity}ml)
+                </Button>
               </CardActions>
             </Card>
           ))}

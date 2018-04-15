@@ -8,7 +8,7 @@ class TabsMenu extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
   }
-  onChange(tabPathname) {
+  onChange(event, tabPathname) {
     this.props.history.push(tabPathname);
   }
   // https://material-ui-next.com/api/tabs/
@@ -32,8 +32,10 @@ class TabsMenu extends React.Component {
 
     return (
       <Tabs
-        indicatorcolor="primary"
-        textcolor="primary"
+        centered={true}
+        fullWidth={true}
+        indicatorcolor="accent"
+        textcolor="accent"
         onChange={this.onChange}
         value={this.getSelectedTabPathname()}
       >
