@@ -15,11 +15,14 @@ const initialState = {
   },
   byId: {
     rain: {
-      volumeLastThreeHours: 0,
+      isCurrentWeatherCondition: false,
+      intensity: 0,
       title: "Rain",
       imageSrc: "https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/rain-06.jpg"
     },
     clouds: {
+      isCurrentWeatherCondition: false,
+      intensity: 0,
       title: "Cloudiness",
       imageSrc: "https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/clouds.jpg"
     }
@@ -47,19 +50,24 @@ export default function weatherReducer(state = initialState, action) {
   const actionCopy = clone(action);
   const newState = clone(state);
 
-  const latestWeatherData = actionCopy.weatherData.data.list.slice(-1)[0];
-  const volumeLastThreeHours = latestWeatherData.rain['3h'];
+  const weatherApiResponse = actionCopy.weatherData.data;
 
-  if (Number.isFinite(volumeLastThreeHours)) {
-    Object.assign(newState.byId['rain'], { volumeLastThreeHours });
-
-    const { description } = latestWeatherData.weather.slice(-1)[0];
-    Object.assign(newState.summary, { description });
-
-    logApiFetchResult(newState, FETCH_OK);
-  } else {
+  if (!weatherApiResponse) {
     logApiFetchResult(newState, FETCH_FAIL);
+    return newState;
   }
 
+  const isRainy = weatherApiResponse.rainIntensity > 0;
+
+  Object.assign(newState.byId['rain'], {
+    isCurrentWeatherCondition: isRainy,
+    intensity: weatherApiResponse.rainIntensity
+  });
+
+  // TODO: Update status for cloudiness
+
+  newState.summary.description = weatherApiResponse.summary;
+
+  logApiFetchResult(newState, FETCH_OK);
   return newState;
 }
