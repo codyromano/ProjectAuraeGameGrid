@@ -24,6 +24,7 @@ const resourceHandlers = {
   },
 
   [CLASS_CURRENCY]: (id) => (state, action) => {
+    state.byId[id].amount += action.resource.addAmount;
     return state;
   }
 };

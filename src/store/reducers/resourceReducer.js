@@ -1,13 +1,14 @@
 import uniqid from 'uniqid';
 import clone from 'clone';
-import {
-  CLASS_PLANT,
-  RESOURCE_ACQUIRED
-} from '../actions';
+import { RESOURCE_ACQUIRED } from '../actions';
 import { resourceHandlerFactory } from './resource-handlers';
 
 const initialState = {
-  byId: {},
+  byId: {
+    water: {
+      amount: 0.25
+    }
+  },
   byClass: {},
   byPosition: {},
   allIds: []
@@ -22,9 +23,14 @@ export default function resourceReducer(
 
   switch (action.type) {
     case RESOURCE_ACQUIRED:
-      const id = uniqid();
+      const id = (typeof actionCopy.id !== 'undefined') ?
+        actionCopy.id : uniqid();
 
-      newState.byId[id] = actionCopy.resource;
+      newState.byId[id] = Object.assign(
+        newState.byId[id] || {},
+        actionCopy.resource
+      );
+
       newState.byId[id].class = actionCopy.class;
 
       newState.allIds.push(id);

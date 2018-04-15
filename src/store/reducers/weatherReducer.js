@@ -57,10 +57,12 @@ export default function weatherReducer(state = initialState, action) {
   }
 
   const isRainy = weatherApiResponse.rainIntensity > 0;
+  const MOCK_EXTRA_RAIN = 0.5;
 
   Object.assign(newState.byId['rain'], {
     isCurrentWeatherCondition: isRainy,
-    intensity: weatherApiResponse.rainIntensity
+    // TODO: Remove mock
+    intensity: weatherApiResponse.rainIntensity + MOCK_EXTRA_RAIN
   });
 
   // eslint-disable-next-line no-unused-vars

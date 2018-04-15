@@ -78,8 +78,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  currencyResourceAcquired: (weatherType, amount) => dispatch(
-    currencyResourceAcquired(weatherType, amount)
+  currencyResourceAcquired: (weatherType, addAmount) => dispatch(
+    currencyResourceAcquired(weatherType, addAmount)
   )
 });
 

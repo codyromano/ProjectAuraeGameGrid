@@ -19,12 +19,13 @@ export const weatherDataFetched = (serverResponse) => ({
   weatherData: serverResponse
 });
 
-export const currencyResourceAcquired = (name, amount) => ({
+export const currencyResourceAcquired = (name, addAmount) => ({
+  id: name,
   type: RESOURCE_ACQUIRED,
   class: CLASS_CURRENCY,
   resource: {
     name,
-    amount
+    addAmount
   }
 });
 
