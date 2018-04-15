@@ -5,9 +5,8 @@ import Icon from 'material-ui/Icon';
 import { CLASS_CURRENCY } from '../../../store/actions';
 
 const gridContainerProps = {
-  fullWidth: true,
   container: true,
-  alignContent: 'space-around'
+  alignContent: 'center'
 };
 
 const CurrencyDisplay = ({ currencies }) => {
@@ -16,7 +15,7 @@ const CurrencyDisplay = ({ currencies }) => {
   return (
     <Grid {...gridContainerProps}>
       {currencies.map(currency => (
-        <Grid item xs={4} alignContent='center'>
+        <Grid key={currency.name} item xs={4}>
           {currency.name}: {currency.amount}
         </Grid>
       ))}
