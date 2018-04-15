@@ -1,12 +1,22 @@
 const initialState = [
   {
-    title: 'White birch tree',
-    imageSrc: 'https://www.pngarts.com/files/1/Sakura-PNG-Free-Download.png',
+    title: 'Sakura Tree',
+    imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/Sakura.jpg',
     description: 'Description'
   },
   {
-    title: 'Rose cluster',
-    imageSrc: 'https://vignette.wikia.nocookie.net/paradise-bay/images/4/4f/Rose.png/revision/latest?cb=20170328185143',
+    title: 'Rose',
+    imageSrc: '	https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/Rose.jpg',
+    description: 'Description'
+  },
+  {
+    title: 'Alaska Cedar Sprout',
+    imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/cedar.jpg',
+    description: 'Description'
+  },
+  {
+    title: 'Blackfruit Dogwood',
+    imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/Blackfruit_Dogwood.jpg',
     description: 'Description'
   }
 ];
