@@ -28,8 +28,6 @@ class WeatherPage extends React.Component {
           </Warning>)}
 
           <PageWidthContainer>
-            {/* <h1>{this.props.description}</h1> */}
-
             {this.props.weather.map(card => (
               <Card key={card.title}>
                 <CardHeader

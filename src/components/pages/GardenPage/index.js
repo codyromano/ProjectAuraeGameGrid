@@ -56,14 +56,13 @@ class GardenPage extends React.Component {
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
-          <h1>Select an empty tile to plant something</h1>
           <GameGrid
             defaultTileInnerContent={GrassTile}
             onGridTileSelected={this.onGridTileSelected}
             tileInnerContentMap={tileInnerContentMap}
             tileSize={5}
-            width={6}
-            height={6}
+            width={4}
+            height={4}
           />
         </PageWidthContainer>
       </BasePage>

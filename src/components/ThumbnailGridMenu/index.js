@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ThumbnailGridMenu.css';
+import { GridList, GridTile } from 'material-ui/GridList';
 
 const ThumbnailGridMenu = ({
   items,
   onSelect
 }) => (
-  <div className="thumbnail-grid-menu">
+  <GridList>
     {items.map(item => (
-      <button key={item.title} className="thumbnail-grid-menu-button"
-        onClick={() => onSelect(item)}>
-        <img
-          alt={item.title}
-          className="thumbnail-grid-menu-image"
-          src={item.imageSrc} />
-        {item.title}
-      </button>
+      <GridTile
+        onClick={() => onSelect(item)}
+        key={item.title}
+        title={item.title}
+      >
+          <img src={item.imageSrc} alt={item.title} />
+      </GridTile>
     ))}
-  </div>
+  </GridList>
 );
 
 const itemShape = PropTypes.shape({
