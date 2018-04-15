@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import Paper from 'material-ui/Paper';
-import Card, { CardMedia, CardHeader } from 'material-ui/Card';
-import GridList, { GridTile } from 'material-ui/GridList';
+import RaisedButton from 'material-ui/RaisedButton';
+import Card, { CardActions, CardText, CardHeader } from 'material-ui/Card';
 
 import BasePage from '../BasePage';
 import { PageWidthContainer } from '../../layout';
@@ -29,22 +28,29 @@ class WeatherPage extends React.Component {
           </Warning>)}
 
           <PageWidthContainer>
-            <h1>{this.props.description}</h1>
+            {/* <h1>{this.props.description}</h1> */}
 
-            <Paper>
-              <GridList>
-                {this.props.weather.map(card => (
-                  <GridTile key={card.title}>
-                    <Card initiallyExpanded={true}>
-                      <CardHeader title={card.title} />
-                      <CardMedia>
-                        <img alt={card.title} src={card.imageSrc} />
-                      </CardMedia>
-                    </Card>
-                  </GridTile>
-                ))}
-              </GridList>
-            </Paper>
+            {this.props.weather.map(card => (
+              <Card key={card.title}>
+                <CardHeader
+                  title={card.title}
+                  subtitle={`${card.intensityDescriptor}`}
+                  avatar={card.imageSrc}
+                />
+
+              <CardText>
+              {card.description}
+              </CardText>
+
+              <CardActions>
+                <RaisedButton
+                  primary={true}
+                  label={`Collect ${card.noun} (${card.intensity}ml)`}
+                  fullWidth={true}
+                />
+              </CardActions>
+            </Card>
+          ))}
           </PageWidthContainer>
       </BasePage>
     );
@@ -52,7 +58,6 @@ class WeatherPage extends React.Component {
 }
 
 WeatherPage.propTypes = {
-  rainVolume: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired
 };
@@ -64,7 +69,6 @@ const mapStateToProps = (state) => {
   return {
     fetchProblem: latestApiFetch.status === FETCH_FAIL,
     weather: state.weather.allIds.map(id => state.weather.byId[id]),
-    rainVolume: state.weather.byId['rain'].volumeLastThreeHours,
     description: state.weather.summary.description
   }
 };

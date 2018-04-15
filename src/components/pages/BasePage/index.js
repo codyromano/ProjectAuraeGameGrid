@@ -24,7 +24,7 @@ export default class BasePage extends React.Component {
                 selectedTabId={this.props.selectedTabId}
               />
             </Paper>
-            <section className="base-page-content">
+            <section className="basePageContent">
               {this.props.children}
             </section>
           </main>

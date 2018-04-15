@@ -17,17 +17,15 @@ const initialState = {
     rain: {
       isCurrentWeatherCondition: false,
       intensity: 0,
-      title: "Rain",
+      intensityDescriptor: '{intensity}ml per hour',
+      title: "It's raining!",
+      description: `When it's raining in your area, you can collect water
+      to use in your garden. Water makes your plants grow.`,
+      noun: "Water",
       imageSrc: "https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/rain-06.jpg"
-    },
-    clouds: {
-      isCurrentWeatherCondition: false,
-      intensity: 0,
-      title: "Cloudiness",
-      imageSrc: "https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/clouds.jpg"
     }
   },
-  allIds: ["rain", "clouds"]
+  allIds: ["rain"]
 };
 
 /**
@@ -63,6 +61,15 @@ export default function weatherReducer(state = initialState, action) {
     isCurrentWeatherCondition: isRainy,
     intensity: weatherApiResponse.rainIntensity
   });
+
+  // eslint-disable-next-line no-unused-vars
+  for (const [id, resource] of Object.entries(newState.byId)) {
+    // If there's an "{intensity}" placeholder in the description,
+    // replace it with actual data
+    resource.intensityDescriptor = resource.intensityDescriptor.replace(
+      /{intensity}/g, resource.intensity
+    );
+  }
 
   // TODO: Update status for cloudiness
 
