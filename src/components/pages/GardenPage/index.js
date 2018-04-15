@@ -63,7 +63,7 @@ class GardenPage extends React.Component {
             onGridTileSelected={this.onGridTileSelected}
             tileInnerContentMap={tileInnerContentMap}
             tileSize={5}
-            width={4}
+            width={3}
             height={4}
           />
         </PageWidthContainer>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GameGridTile from './GameGridTile';
 import './GameGrid.css';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
+import Grid from 'material-ui/Grid';
 
 class GameGrid extends React.Component {
   static propTypes = {
@@ -71,14 +72,10 @@ class GameGrid extends React.Component {
   }
 
   render() {
-    const inlineStyle = {
-      width: `${this.props.tileSize * this.props.width}rem`
-    };
-
     return (
-      <div style={inlineStyle} className="game-grid">
+      <Grid container className="game-grid">
         {this.cachedGridTiles}
-      </div>
+      </Grid>
     );
   }
 }

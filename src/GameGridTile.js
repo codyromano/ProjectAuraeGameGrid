@@ -1,25 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Card from 'material-ui/Card';
 import { serializeGameObjectLocation } from './store/gameDataUtils';
 import GrassTile from './GrassTile';
 import './GameGridTile.css';
+import Grid from 'material-ui/Grid';
 
 function coordsMatch(pairA, pairB) {
   return pairA.join('') === pairB.join('');
 }
 
 function gameGridComponentFactory(childComponentInfo) {
-  const inlineStyle = { maxWidth: '100%' };
+  const inlineStyle = {
+    backgroundImage: `url(${childComponentInfo.imageSrc})`
+  };
 
   return (props) => (
-    <div>
-      <img
-        alt={`Game resource`}
-        style={inlineStyle}
-        src={childComponentInfo.imageSrc} />
-    </div>
+    <div className="grid-tile-graphic" style={inlineStyle} />
   );
 }
 
@@ -44,17 +41,14 @@ const GameGridTile = ({
   }
 
   return (
-    <Card raised={true}>
-      <div
-        style={{ height: tileSize, width: tileSize }}
-        className={classList.join(' ')}
-        onClick={(event) => onGridTileSelected(coords)}
-      >
-        {innerComponents.map((InnerComponent, i) => (
-          <InnerComponent key={i}/>
-        ))}
-      </div>
-    </Card>
+    <Grid item xs={4}
+      className={classList.join(' ')}
+      onClick={(event) => onGridTileSelected(coords)}
+    >
+      {innerComponents.map((InnerComponent, i) => (
+        <InnerComponent key={i}/>
+      ))}
+    </Grid>
   );
 };
 
