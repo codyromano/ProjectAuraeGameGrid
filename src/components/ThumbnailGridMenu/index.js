@@ -11,6 +11,7 @@ const ThumbnailGridMenu = ({
   <GridList>
     {items.map(item => (
       <GridTile
+        style={{ cursor: 'pointer' }}
         onClick={() => onSelect(item)}
         key={item.title}
         title={item.title}
