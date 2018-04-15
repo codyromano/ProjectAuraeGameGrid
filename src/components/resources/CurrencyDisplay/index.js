@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Icon from 'material-ui/Icon';
 import { CLASS_CURRENCY } from '../../../store/actions';
 
 const gridContainerProps = {
@@ -10,8 +9,6 @@ const gridContainerProps = {
 };
 
 const CurrencyDisplay = ({ currencies }) => {
-  const icon = <Icon>restore</Icon>;
-
   return (
     <Grid {...gridContainerProps}>
       {currencies.map(currency => (
