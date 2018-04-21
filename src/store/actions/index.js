@@ -1,9 +1,14 @@
 // Actions
-// TODO: Use enum
 export const TILE_SELECTED = 'tileSelected';
 export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
 export const RESOURCE_ACQUIRED = 'acquired';
+export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
+
+export const STAT_WATER_LEVEL = 'water';
+export const STAT_OPERATOR_SET = 'add';
+export const STAT_OPERATOR_ADD = 'add';
+export const STAT_OPERATOR_SUBTRACT = 'add';
 
 // TODO: Move to game object class def file
 export const CLASS_PLANT = 'plant';
@@ -45,3 +50,16 @@ export const resourceSelectionConfirmed = (resource) => {
     resource
   });
 };
+
+export const resourceStatChanged = (
+  resourceId,
+  statName,
+  statValue,
+  operator = 'set'
+) => ({
+  type: RESOURCE_STAT_CHANGED,
+  resourceId,
+  statName,
+  statValue,
+  operator
+});

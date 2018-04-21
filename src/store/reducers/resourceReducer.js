@@ -1,7 +1,12 @@
 import uniqid from 'uniqid';
 import clone from 'clone';
-import { RESOURCE_ACQUIRED, CLASS_CURRENCY } from '../actions';
+import {
+  RESOURCE_STAT_CHANGED,
+  RESOURCE_ACQUIRED,
+  CLASS_CURRENCY
+} from '../actions';
 import { resourceHandlerFactory } from './resource-handlers';
+import resourceStatReducer from './resourceStatReducer';
 
 const initialState = {
   byId: {
@@ -9,7 +14,9 @@ const initialState = {
       id: 'water',
       name: 'Water',
       class: CLASS_CURRENCY,
-      amount: 0.25
+      stats: {
+        amount: 0.25
+      }
     }
   },
   byClass: {
@@ -54,6 +61,9 @@ export default function resourceReducer(
       const applyResourceClassLogic = resourceHandlerFactory(actionCopy.class, id);
       newState = applyResourceClassLogic(newState, actionCopy);
 
+    break;
+    case RESOURCE_STAT_CHANGED:
+      newState = resourceStatReducer(newState, action);
     break;
     default:
     break;

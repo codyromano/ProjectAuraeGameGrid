@@ -13,7 +13,7 @@ const CurrencyDisplay = ({ currencies }) => {
     <Grid {...gridContainerProps}>
       {currencies.map(currency => (
         <Grid key={currency.name} item xs={4}>
-          {currency.name}: {currency.amount}
+          {currency.name}: {currency.stats.amount}
         </Grid>
       ))}
     </Grid>
