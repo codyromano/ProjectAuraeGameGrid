@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import { CLASS_CURRENCY } from '../../../store/actions';
+import { CLASS_CURRENCY } from 'aurae-resource-classes';
 
 const gridContainerProps = {
   container: true,

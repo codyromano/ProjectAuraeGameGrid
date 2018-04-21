@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay';
 import BasePage from 'aurae-components/pages/BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
@@ -38,6 +39,7 @@ class ManageResourcePage extends React.Component {
               STAT_OPERATOR_ADD
             )
           }}>Increase plant water level</button>
+          <ResourceStatDisplay resource={this.props.resource} />
         </PageWidthContainer>
       </BasePage>
     );

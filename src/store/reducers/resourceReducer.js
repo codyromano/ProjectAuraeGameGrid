@@ -2,9 +2,9 @@ import uniqid from 'uniqid';
 import clone from 'clone';
 import {
   RESOURCE_STAT_CHANGED,
-  RESOURCE_ACQUIRED,
-  CLASS_CURRENCY
-} from '../actions';
+  RESOURCE_ACQUIRED
+} from 'aurae-actions';
+import { CLASS_CURRENCY } from 'aurae-resource-classes';
 import { resourceHandlerFactory } from './resource-handlers';
 import resourceStatReducer from './resourceStatReducer';
 
@@ -47,6 +47,7 @@ export default function resourceReducer(
       );
 
       newState.byId[id].id = id;
+      newState.byId[id].stats = newState.byId[id].stats || {};
       newState.byId[id].class = actionCopy.class;
 
       // If the resource doesn't already exist, create a mapping of its

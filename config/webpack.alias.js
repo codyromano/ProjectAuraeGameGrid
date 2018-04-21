@@ -5,7 +5,9 @@ const aliases = {
   'aurae-actions': 'src/store/actions',
   'aurae-config': 'src/config',
   'aurae-components': 'src/components',
-  'aurae-pages': 'src/components/pages'
+  'aurae-pages': 'src/components/pages',
+  'aurae-common-shapes': 'src/components/commonShapes',
+  'aurae-resource-classes': 'src/config/resourceClasses'
 };
 
 module.exports = Object.keys(aliases).reduce((map, alias) => {

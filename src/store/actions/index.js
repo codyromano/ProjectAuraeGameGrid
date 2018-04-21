@@ -1,3 +1,5 @@
+import { CLASS_CURRENCY, CLASS_PLANT } from 'aurae-resource-classes';
+
 // Actions
 export const TILE_SELECTED = 'tileSelected';
 export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
@@ -9,10 +11,6 @@ export const STAT_WATER_LEVEL = 'water';
 export const STAT_OPERATOR_SET = 'add';
 export const STAT_OPERATOR_ADD = 'add';
 export const STAT_OPERATOR_SUBTRACT = 'add';
-
-// TODO: Move to game object class def file
-export const CLASS_PLANT = 'plant';
-export const CLASS_CURRENCY = 'currency';
 
 export const tileSelected = (coords) => ({
   type: TILE_SELECTED,

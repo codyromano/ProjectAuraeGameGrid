@@ -1,7 +1,7 @@
 import {
   CLASS_PLANT,
   CLASS_CURRENCY
-} from '../../actions';
+} from 'aurae-resource-classes';
 import { serializeGameObjectLocation } from '../../gameDataUtils';
 
 const initialAttributes = {

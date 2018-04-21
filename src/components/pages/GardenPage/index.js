@@ -14,7 +14,8 @@ import GrassTile from '../../../GrassTile';
 import { routerRedirector } from '../../../routes';
 
 import './GardenPage.css';
-import { CLASS_PLANT, tileSelected } from '../../../store/actions';
+import { tileSelected } from 'aurae-actions';
+import { CLASS_PLANT } from 'aurae-resource-classes';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
