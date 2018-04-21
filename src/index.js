@@ -1,11 +1,11 @@
 import React from 'react';
-import * as pages from './components/pages';
+import * as pages from 'aurae-pages';
 import { routePaths } from './routes';
 
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
-import primaryReducer from './store/reducers/primaryReducer';
+import primaryReducer from 'aurae-reducers/primaryReducer';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 const store = createStore(

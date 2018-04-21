@@ -4,14 +4,14 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import BasePage from '../BasePage';
+import BasePage from 'aurae-components/pages/BasePage';
 import { PageWidthContainer } from '../../layout';
-import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
+import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import {
   STAT_WATER_LEVEL,
   STAT_OPERATOR_ADD,
   resourceStatChanged
-} from '../../../store/actions';
+} from 'aurae-actions';
 
 class ManageResourcePage extends React.Component {
   render() {

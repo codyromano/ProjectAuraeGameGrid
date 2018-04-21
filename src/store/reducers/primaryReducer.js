@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import gameItems from './gameItemsReducer';
-import currentTile from './currentTileReducer';
-import resources from './resourceReducer';
-import weather from './weatherReducer';
+import gameItems from 'aurae-reducers/gameItemsReducer';
+import currentTile from 'aurae-reducers/currentTileReducer';
+import resources from 'aurae-reducers/resourceReducer';
+import weather from 'aurae-reducers/weatherReducer';
 
 export default combineReducers({
   gameItems,

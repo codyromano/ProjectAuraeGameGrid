@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { MaterialUIProvider } from '../../layout';
-import tabsInfo from '../../../config/tabsMenuConfig';
+import tabsInfo from 'aurae-config/tabsMenuConfig';
 // Import TabsMenuBase without the "withRouter" wrapper so
 // we can easily mock this dependency
 import { TabsMenuBase } from './index';
@@ -23,7 +23,7 @@ const defaultMockHistory = ({
   push: () => {}
 });
 
-const createMockTestTabs = (mockHistory = defaultMockHistory) => 
+const createMockTestTabs = (mockHistory = defaultMockHistory) =>
   mount(
     <TestContext>
       <TabsMenuBase selectedTabId={'weather'} history={mockHistory} tabs={tabsInfo} />

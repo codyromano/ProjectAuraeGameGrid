@@ -6,12 +6,12 @@ import { MaterialUIProvider } from '../../layout';
 
 import './BasePage.css';
 
-import TabsMenu from '../../navigation/TabsMenu';
-import tabsMenuConfig from '../../../config/tabsMenuConfig';
-import { GET_CURRENT_WEATHER } from '../../../config/endpoints';
-import { weatherDataFetched } from '../../../store/actions';
-import ReduxFetch from '../../data-providers/ReduxFetch';
-import CurrencyDisplay from '../../resources/CurrencyDisplay';
+import TabsMenu from 'aurae-components/navigation/TabsMenu';
+import tabsMenuConfig from 'aurae-config/tabsMenuConfig';
+import { GET_CURRENT_WEATHER } from 'aurae-config/endpoints';
+import { weatherDataFetched } from 'aurae-actions';
+import ReduxFetch from 'aurae-components/data-providers/ReduxFetch';
+import CurrencyDisplay from 'aurae-components/resources/CurrencyDisplay';
 
 export default class BasePage extends React.Component {
   render() {
