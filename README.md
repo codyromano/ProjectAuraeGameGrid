@@ -1,6 +1,7 @@
 # Project Aurae Gameplay
 
 Prototype for core gameplay
+![Beta view of selecting plant resources](https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/project-aurae.gif)
 
 ## Getting started
 
