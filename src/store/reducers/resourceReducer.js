@@ -14,13 +14,35 @@ const initialState = {
       id: 'water',
       name: 'Water',
       class: CLASS_CURRENCY,
+      iconSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-icon-water.jpeg',
+      iconAlt: 'Water currency',
       stats: {
         amount: 0.25
+      }
+    },
+    seeds: {
+      id: 'seeds',
+      name: 'Seeds',
+      class: CLASS_CURRENCY,
+      iconSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-icon-seed.jpg',
+      iconAlt: 'Seed currency',
+      stats: {
+        amount: 5
+      }
+    },
+    gold: {
+      id: 'gold',
+      name: 'Gold',
+      class: CLASS_CURRENCY,
+      iconSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-icon-gold.jpg',
+      iconAlt: 'Gold currency',
+      stats: {
+        amount: 0
       }
     }
   },
   byClass: {
-    [CLASS_CURRENCY]: ['water']
+    [CLASS_CURRENCY]: ['water', 'seeds', 'gold']
   },
   byPosition: {},
   allIds: []

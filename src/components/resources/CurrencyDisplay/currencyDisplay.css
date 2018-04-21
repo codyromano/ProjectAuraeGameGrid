@@ -1,0 +1,23 @@
+.currency-display {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.currency-icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+.currency-amount {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+.currency-icon + .currency-amount {
+  padding-left: 0.5em;
+}
+.resource-item {
+  text-align: center;
+}
+.currency-display-inner-wrapper {
+  padding: 0.5rem 0;
+}
