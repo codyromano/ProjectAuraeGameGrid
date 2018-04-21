@@ -31,6 +31,7 @@ export const currencyResourceAcquired = (name, addAmount) => ({
 
 export const plantResourceAcquired = (resource, selectedCoords) => {
   return ({
+    id: resource.id,
     type: RESOURCE_ACQUIRED,
     class: CLASS_PLANT,
     selectedCoords,

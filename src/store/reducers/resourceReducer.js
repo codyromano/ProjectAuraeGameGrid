@@ -30,6 +30,7 @@ export default function resourceReducer(
     case RESOURCE_ACQUIRED:
       // An ID that has some meaning with respect to the resource is
       // recommended. If the action has no 'id', we fall back to a GUID.
+      // For example: prefer to use "water" as ID for water resource
       const id = (typeof actionCopy.id !== 'undefined') ?
         actionCopy.id : uniqid();
 
@@ -38,6 +39,7 @@ export default function resourceReducer(
         actionCopy.resource
       );
 
+      newState.byId[id].id = id;
       newState.byId[id].class = actionCopy.class;
 
       // If the resource doesn't already exist, create a mapping of its
