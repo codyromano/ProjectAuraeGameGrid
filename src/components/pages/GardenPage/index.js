@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import {
+  getGameObjectsInPosition
+} from '../../../store/gameDataUtils';
 
 import BasePage from '../BasePage';
 
@@ -15,25 +18,6 @@ import { CLASS_PLANT, tileSelected } from '../../../store/actions';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
-const createTileResourceComponent = ({ imageSrc }) => (props) => (
-  <div>
-    <img
-      alt="Tile resource"
-      style={{maxWidth: '100%'}}
-      src={imageSrc} />
-  </div>
-);
-
-// TODO: Move to helper function
-function mapPlainObject(object, mapFn) {
-  const newObject = {...object};
-
-  for (const [key, value] of Object.entries(object)) {
-    newObject[key] = mapFn(value);
-  }
-  return newObject;
-}
-
 class GardenPage extends React.Component {
   constructor(props) {
     super(props);
@@ -41,18 +25,22 @@ class GardenPage extends React.Component {
     this.redirector = routerRedirector(props.history);
   }
   onGridTileSelected(coords) {
-    // TODO: Remove context reference
-    this.context.store.dispatch(
-      tileSelected(coords)
-    );
-    this.redirector.placeTileResource();
+    const resources = this.props.getGameObjectsInPosition(coords);
+
+    if (resources.length) {
+      // TODO: Open question - can resources be stacked? Does the manage
+      // resource route need to support editing multiple resources?
+      const mostRecentResource = resources.slice(-1)[0];
+      this.redirector.manageResource(mostRecentResource);
+    } else {
+      // TODO: Remove context reference
+      this.context.store.dispatch(
+        tileSelected(coords)
+      );
+      this.redirector.placeTileResource();
+    }
   }
   render() {
-    const tileInnerContentMap = mapPlainObject(
-      this.props.tileInnerContentMap,
-      createTileResourceComponent
-    );
-
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
@@ -61,7 +49,6 @@ class GardenPage extends React.Component {
           <GameGrid
             defaultTileInnerContent={GrassTile}
             onGridTileSelected={this.onGridTileSelected}
-            tileInnerContentMap={tileInnerContentMap}
             tileSize={5}
             width={3}
             height={4}
@@ -96,6 +83,7 @@ const mapStateToProps = (state) => {
   }
 
   return {
+    getGameObjectsInPosition: getGameObjectsInPosition.bind(null, state),
     headerText: hasPlants ?
       'Select a plant to make it grow' : 'Tap a tile to plant something',
     tileInnerContentMap: tileInnerContentMap

@@ -20,6 +20,7 @@ render(
       <Switch>
         <Route path={routePaths.PLACE_RESOURCE} exact={true} component={pages.PlaceTileResource} />
         <Route path={routePaths.WEATHER_PAGE} exact={true} component={pages.WeatherPage} />
+        <Route path={routePaths.MANAGE_RESOURCE} exact={true} component={pages.ManageResourcePage} />
         <Route path={routePaths.TILE_MAP} component={pages.GardenPage} />
       </Switch>
     </HashRouter>
