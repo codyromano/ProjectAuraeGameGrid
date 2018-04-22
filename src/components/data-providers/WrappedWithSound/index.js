@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const wrapFn = (targetFn, wrapper) => (...args) => {
+  wrapper(...args);
+  return targetFn(...args);
+};
+const emptyFn = () => {};
+
 /**
 * A container that plays a sound effect when the user interacts
 * with any of its child components.
@@ -35,7 +41,7 @@ export class SoundEffect extends React.Component {
     return React.Children.map(
       children,
       child => React.cloneElement(child, {
-        [listenerType]: this.playSound
+        [listenerType]: wrapFn(child.props.onClick || emptyFn, this.playSound)
       })
     );
   }
