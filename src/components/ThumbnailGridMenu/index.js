@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ThumbnailGridMenu.css';
 import GridList, { GridListTile } from 'material-ui/GridList';
+import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 
 const ThumbnailGridMenu = ({
   items,
@@ -16,7 +17,9 @@ const ThumbnailGridMenu = ({
         key={item.title}
         title={item.title}
       >
+        <SoundEffect audioUrl="https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/sound-effect-branch-snap.mp3">
           <img src={item.imageSrc} alt={item.title} />
+        </SoundEffect>
       </GridListTile>
     ))}
   </GridList>

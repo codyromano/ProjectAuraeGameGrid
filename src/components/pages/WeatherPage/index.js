@@ -10,8 +10,9 @@ import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import BasePage from '../BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_WEATHER } from '../../../config/tabsMenuConfig';
-import { FETCH_FAIL } from '../../../store/reducers/weatherReducer';
-import { currencyResourceAcquired } from '../../../store/actions';
+import { FETCH_FAIL } from 'aurae-reducers/weatherReducer';
+import { currencyResourceAcquired } from 'aurae-actions';
+import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 
 // TODO: Move to a more general modules file and improve design
 const Warning = ({ children }) => (
@@ -43,18 +44,20 @@ class WeatherPage extends React.Component {
               </CardContent>
 
               <CardActions>
-                <Button
-                  variant="raised"
-                  color="primary"
-                  onClick={() => this.props.currencyResourceAcquired(
-                    card.id,
-                    card.intensity
-                  )}
-                  label={`Collect ${card.noun} (${card.intensity}ml)`}
-                  fullWidth={true}
-                >
-                  Collect {card.noun} ({card.intensity}ml)
-                </Button>
+                <SoundEffect audioUrl="https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/sound-effect-water-splash.mp3">
+                  <Button
+                    variant="raised"
+                    color="primary"
+                    onClick={() => this.props.currencyResourceAcquired(
+                      card.id,
+                      card.intensity
+                    )}
+                    label={`Collect ${card.noun} (${card.intensity}ml)`}
+                    fullWidth={true}
+                  >
+                    Collect {card.noun} ({card.intensity}ml)
+                  </Button>
+                </SoundEffect>
               </CardActions>
             </Card>
           ))}
