@@ -18,8 +18,7 @@ const CurrencyDisplay = ({ currencies }) => {
         <div className="currency-display-inner-wrapper">
           <Grid {...gridContainerProps}>
             {currencies.map(currency => (
-              <Grid key={currency.name} item xs={3} justify="center"
-                className="resource-item">
+              <Grid key={currency.name} item xs={3} className="resource-item">
                 <img className="currency-icon" alt={currency.iconAlt} src={currency.iconSrc} />
                 <span className="currency-amount">{currency.stats.amount}</span>
               </Grid>
