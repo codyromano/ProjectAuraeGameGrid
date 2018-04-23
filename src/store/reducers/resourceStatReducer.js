@@ -28,6 +28,8 @@ export default function resourceStatReducer(state, action = {}) {
       resource.stats[actionCopy.statName] -= actionCopy.statValue;
     break;
     default:
+      // eslint-disable-next-line no-console
+      console.error(`Unrecognized stat operator: ${actionCopy.operator}`);
     break;
   }
 

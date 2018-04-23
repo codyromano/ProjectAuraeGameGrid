@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import Chip from 'material-ui/Chip';
 
 import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay';
 import BasePage from 'aurae-components/pages/BasePage';
@@ -16,7 +19,9 @@ import {
 
 class ManageResourcePage extends React.Component {
   render() {
-    if (!this.props.resource) {
+    const { resource } = this.props;
+
+    if (!resource) {
       return (<BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
           Resource not found
@@ -24,22 +29,43 @@ class ManageResourcePage extends React.Component {
       </BasePage>);
     }
 
-    const { id } = this.props.resource;
+
+    const { id } = resource;
+    // TODO: Move to css
+    const plantImageStyles = {
+      display: 'block',
+      margin: '0.5rem 0',
+      width: '7rem'
+    };
 
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
-          <h1>{this.props.resource.title}</h1>
-          <img alt={this.props.resource.title} src={this.props.resource.imageSrc} />
-          <button onClick={() => {
+          <Grid container spacing={16} alignItems="center">
+            <Grid item>
+              <h1>{resource.title}</h1>
+            </Grid>
+            <Grid item>
+              <Chip label={`Level ${resource.stats.level}`} />
+            </Grid>
+          </Grid>
+
+          <img style={plantImageStyles} alt={resource.title} src={resource.imageSrc} />
+          <ResourceStatDisplay resource={resource} />
+          <p>{resource.fullDescription}</p>
+
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={() => {
             this.props.resourceStatChanged(
               id,
               STAT_WATER_LEVEL,
-              100,
+              5,
               STAT_OPERATOR_ADD
             )
-          }}>Increase plant water level</button>
-          <ResourceStatDisplay resource={this.props.resource} />
+          }}>Add water</Button>
+
         </PageWidthContainer>
       </BasePage>
     );
