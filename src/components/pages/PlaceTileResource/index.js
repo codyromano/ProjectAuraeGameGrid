@@ -12,6 +12,7 @@ import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import Button from 'material-ui/Button';
 import Card, { CardContent, CardActions, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
+import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 
 class PlaceTileResource extends React.Component {
   constructor(props) {
@@ -49,9 +50,11 @@ class PlaceTileResource extends React.Component {
                   <CardHeader {...cardHeaderProps} />
                   <CardContent {...cardContentProps} />
                   <CardActions style={{alignItems: 'right'}}>
-                    <Button
-                      onClick={() => this.onSelect(item)}
-                      color="primary">Choose plant</Button>
+                    <SoundEffect audioUrl="https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/sound-effect-branch-snap.mp3">
+                      <Button
+                        onClick={() => this.onSelect(item)}
+                        color="primary">Choose plant</Button>
+                    </SoundEffect>
                   </CardActions>
                 </Card>
               );
