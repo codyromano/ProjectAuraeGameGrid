@@ -9,10 +9,10 @@ const initialState = [
     stats: {}
   },
   {
-    title: 'Steamy Java Bean',
+    title: 'Steam Bean',
     itemClassDescription: 'Coffee plant',
-    fullDescription: `A marvel of genetic engineering, the Steamy Java Bean contains billions
-      of nanorobots. The bots arrange themselves dinto elaborate cappuccino art while your
+    fullDescription: `A marvel of genetic engineering, the Steam Bean contains billions
+      of nanorobots. The bots arrange themselves into elaborate cappuccino art while your
       neighborhood barista is pouring you a cup.`,
     imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-sugar-java-bean.jpg',
     stats: {}
