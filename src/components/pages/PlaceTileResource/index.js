@@ -49,9 +49,14 @@ class PlaceTileResource extends React.Component {
                 <Card key={item.title} style={cardStyles}>
                   <CardHeader {...cardHeaderProps} />
                   <CardContent {...cardContentProps} />
-                  <CardActions style={{alignItems: 'right'}}>
+                  <CardActions style={{
+                    paddingLeft: '1.5rem',
+                    paddingBottom: '1rem',
+                    alignItems: 'right'
+                  }}>
                     <SoundEffect audioUrl="https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/sound-effect-branch-snap.mp3">
                       <Button
+                        variant="raised"
                         onClick={() => this.onSelect(item)}
                         color="primary">Choose plant</Button>
                     </SoundEffect>
