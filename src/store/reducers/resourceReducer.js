@@ -87,7 +87,7 @@ export default function resourceReducer(
 
     break;
     case RESOURCE_STAT_CHANGED:
-      newState = resourceStatReducer(newState, action);
+      newState = resourceStatReducer(newState, actionCopy);
     break;
     default:
     break;

@@ -8,9 +8,9 @@ export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
 export const STAT_WATER_LEVEL = 'water';
-export const STAT_OPERATOR_SET = 'add';
-export const STAT_OPERATOR_ADD = 'add';
-export const STAT_OPERATOR_SUBTRACT = 'add';
+export const STAT_OPERATOR_SET = 'setStatEquals';
+export const STAT_OPERATOR_ADD = 'incrementStat';
+export const STAT_OPERATOR_SUBTRACT = 'decrementStat';
 
 export const tileSelected = (coords) => ({
   type: TILE_SELECTED,
