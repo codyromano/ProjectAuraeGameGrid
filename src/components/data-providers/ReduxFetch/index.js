@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 const STATUS_FETCH_IDLE = 1;
 const STATUS_FETCH_PENDING = 2;
 const STATUS_FETCH_DONE = 3;
+const STATUS_FETCH_FATAL = 4;
 
 class ReduxFetch extends React.Component {
 
@@ -37,20 +38,39 @@ class ReduxFetch extends React.Component {
       status: STATUS_FETCH_PENDING
     });
 
-    // TODO: Handle exception
-    const serverResponse = await window.fetch(props.endpoint)
-      .then(rawResponse => rawResponse.json())
-      .catch(error => console.error(error));
+    try {
+      const serverResponse = await window.fetch(props.endpoint)
+        .then(rawResponse => rawResponse.json());
 
-    this.log.push({
-      status: STATUS_FETCH_DONE
-    });
+      this.log.push({
+        status: STATUS_FETCH_DONE
+      });
 
-    const action = props.actionCreator(serverResponse);
-    props.publishAction(action);
+      const action = props.actionCreator(serverResponse);
+      props.publishAction(action);
+
+    } catch (error) {
+      this.log.push({
+        status: STATUS_FETCH_FATAL,
+        error
+      });
+    } finally {
+      // Use forceUpdate instead of assigning log to state because
+      // log updates must be synchronous
+      this.forceUpdate();
+    }
   }
 
   render() {
+    if (this.log.slice(-1)[0].status === STATUS_FETCH_FATAL) {
+      const repoLink = "https://github.com/codyromano/simple-weather-service";
+      return (<div>
+          <h1>There was a problem fetching data.</h1>
+          <p>Note for developers: Please ensure that <a href={repoLink}>
+          simple-weather-service</a> is running and that <a href={this.props.endpoint}>{this.props.endpoint}</a> is
+          returning data.</p>
+        </div>)
+    }
     return this.props.children;
   }
 }
