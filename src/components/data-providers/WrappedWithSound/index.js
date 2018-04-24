@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Ensures that we don't replace existing onClick handlers
+// on the target children components
 const wrapFn = (targetFn, wrapper) => (...args) => {
   wrapper(...args);
   return targetFn(...args);

@@ -4,17 +4,20 @@ import { LinearProgress } from 'material-ui/Progress';
 import Grid from 'material-ui/Grid';
 
 const PlantStatDisplay = ({ resource }) => {
-  return (<Grid container alignItems="center">
-    <Grid item xs={4}>
-      <strong>Progress to Lvl {resource.stats.level + 1}</strong>
+  return (<Grid container spacing={8} alignContent="center" alignItems="center">
+    <Grid item xs={1}>
+      <div>Lvl {resource.stats.level}</div>
     </Grid>
-    <Grid item xs={8}>
+    <Grid item xs={10}>
       <LinearProgress
         variant="determinate"
         min={0}
         value={resource.stats.water || 0}
         max={100}
       />
+    </Grid>
+    <Grid item xs={1}>
+      <div>Lvl {resource.stats.level + 1}</div>
     </Grid>
   </Grid>);
 };
