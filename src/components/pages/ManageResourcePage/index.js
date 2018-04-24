@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
@@ -22,8 +21,12 @@ import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import {
   STAT_WATER_LEVEL,
   STAT_OPERATOR_ADD,
+  STAT_OPERATOR_SUBTRACT,
   resourceStatChanged
 } from 'aurae-actions';
+
+// TODO: Should user dictate amount?
+const WATER_AMOUNT = 5;
 
 class ManageResourcePage extends React.Component {
   render() {
@@ -72,17 +75,14 @@ class ManageResourcePage extends React.Component {
             </Grid>
 
             <Grid item>
-              <Button
-                variant="raised"
-                color="primary"
-                onClick={() => {
-                this.props.resourceStatChanged(
-                  id,
-                  STAT_WATER_LEVEL,
-                  5,
-                  STAT_OPERATOR_ADD
-                )
-              }}>Add water</Button>
+              {this.props.water >= WATER_AMOUNT && (
+                <Button
+                  variant="raised"
+                  color="primary"
+                  onClick={() => {
+                    this.props.onAddWaterSelected(id)
+                }}>Add water</Button>
+              )}
             </Grid>
           </Grid>
 
@@ -117,12 +117,6 @@ class ManageResourcePage extends React.Component {
             </TableBody>
           </Table>
 
-
-          {/*
-          <h3>Description</h3>
-          <p>{resource.fullDescription}</p>
-          */}
-
         </PageWidthContainer>
       </BasePage>
     );
@@ -137,15 +131,28 @@ ManageResourcePage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const { resourceId } = ownProps.match.params;
-
   return {
+    water: state.resources.byId['water'].stats.amount,
     resource: state.resources.byId[resourceId]
   };
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  resourceStatChanged
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  onAddWaterSelected: (resourceId) => {
+    // TODO: Fix bug in plant water stat increase; bar not incrementing
+    /*
+    const increasePlantWaterStatAction = resourceStatChanged(
+      resourceId, STAT_WATER_LEVEL, WATER_AMOUNT, STAT_OPERATOR_ADD);
+    */
+
+    const decreaseWaterResource = resourceStatChanged(
+      'water', 'amount', WATER_AMOUNT, STAT_OPERATOR_SUBTRACT
+    );
+
+    // dispatch(increasePlantWaterStatAction);
+    dispatch(decreaseWaterResource);
+  }
+});
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ManageResourcePage)
