@@ -6,6 +6,7 @@ const initialState = [
       is a mystical cold-weather plant. With enough water, it evolves into the Sugar
       Oak: a mighty tree that yields baked delicacies.`,
     imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-sugar-sprout.jpg',
+    imageSrcFull: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-sugar-sprout-full.gif',
     stats: {
       level: 1
     }
@@ -17,6 +18,7 @@ const initialState = [
       of nanorobots. They arrange themselves into cappuccino art while your
       neighborhood barista pours you a cup.`,
     imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-sugar-java-bean.jpg',
+    imageSrcFull: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-steam-bean-full.gif',
     stats: {
       level: 1
     }

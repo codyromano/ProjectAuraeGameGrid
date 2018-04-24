@@ -60,7 +60,7 @@ class ManageResourcePage extends React.Component {
           </Grid>
 
           <img style={plantImageStyles} alt={resource.title}
-            src={"https://i.gifer.com/CVJ.gif"} />
+            src={resource.imageSrcFull} />
           <ResourceStatDisplay resource={resource} />
 
           <p>Water your Sugar Sprout to <strong>evolve</strong> it into
