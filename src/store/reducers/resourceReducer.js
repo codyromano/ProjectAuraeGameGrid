@@ -69,6 +69,7 @@ export default function resourceReducer(
       );
 
       newState.byId[id].id = id;
+      newState.byId[id].timeCreated = new Date().getTime();
       newState.byId[id].stats = newState.byId[id].stats || {};
       newState.byId[id].class = actionCopy.class;
 
