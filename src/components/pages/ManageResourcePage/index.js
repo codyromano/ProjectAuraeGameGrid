@@ -70,9 +70,11 @@ class ManageResourcePage extends React.Component {
           a <strong>Donut Bush</strong>.</p>
 
           <Grid container spacing={16}>
+            {/*
             <Grid item>
               <Button variant="raised">Customize</Button>
             </Grid>
+            */}
 
             <Grid item>
               {this.props.water >= WATER_AMOUNT && (
