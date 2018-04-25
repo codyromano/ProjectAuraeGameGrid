@@ -17,8 +17,7 @@ const initialState = {
       iconSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-icon-water.jpeg',
       iconAlt: 'Water currency',
       stats: {
-        // TODO: Way higher than it should be
-        amount: 100
+        amount: 0
       }
     },
     seeds: {

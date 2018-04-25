@@ -22,6 +22,9 @@ const initialState = {
       title: "It's raining!",
       description: `When it's raining in your area, you can collect water
       to use in your garden. Water makes your plants grow.`,
+      inactiveTitle: "Come back when it's raining",
+      inactiveDescription: `Wait until it's raining in your area, then return
+        to this page to collect water for your garden.`,
       noun: "Water",
       imageSrc: "https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/rain-06.jpg"
     }
@@ -57,12 +60,10 @@ export default function weatherReducer(state = initialState, action) {
   }
 
   const isRainy = weatherApiResponse.rainIntensity > 0;
-  const MOCK_EXTRA_RAIN = 0.5;
 
   Object.assign(newState.byId['rain'], {
     isCurrentWeatherCondition: isRainy,
-    // TODO: Remove mock
-    intensity: weatherApiResponse.rainIntensity + MOCK_EXTRA_RAIN
+    intensity: weatherApiResponse.rainIntensity
   });
 
   // eslint-disable-next-line no-unused-vars
