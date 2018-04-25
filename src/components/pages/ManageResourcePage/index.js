@@ -6,6 +6,8 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
+import { Link } from 'react-router-dom';
+import { routePaths } from 'aurae-routes';
 
 import Table, {
   TableBody,
@@ -29,6 +31,26 @@ import {
 const WATER_AMOUNT = 5;
 
 class ManageResourcePage extends React.Component {
+  renderAllocateWaterButton() {
+    const { id } = this.props.resource;
+
+    return (<Button
+      variant="raised"
+      color="primary"
+      onClick={() => {
+        this.props.onAddWaterSelected(id)
+    }}>Add water</Button>);
+  }
+  renderCollectWaterButton() {
+    return (
+      <Link to={routePaths.WEATHER_PAGE}>
+        <Button
+          variant="raised"
+          color="primary"
+        >Collect water</Button>
+      </Link>
+    );
+  }
   render() {
     const { resource } = this.props;
 
@@ -40,8 +62,6 @@ class ManageResourcePage extends React.Component {
       </BasePage>);
     }
 
-
-    const { id } = resource;
     // TODO: Move to css
     const plantImageStyles = {
       display: 'block',
@@ -49,6 +69,10 @@ class ManageResourcePage extends React.Component {
       // width: '7rem'
       width: '100%'
     };
+
+    const CallToAction = this.props.water >= WATER_AMOUNT ?
+      this.renderAllocateWaterButton() :
+      this.renderCollectWaterButton();
 
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
@@ -75,16 +99,8 @@ class ManageResourcePage extends React.Component {
               <Button variant="raised">Customize</Button>
             </Grid>
             */}
-
             <Grid item>
-              {this.props.water >= WATER_AMOUNT && (
-                <Button
-                  variant="raised"
-                  color="primary"
-                  onClick={() => {
-                    this.props.onAddWaterSelected(id)
-                }}>Add water</Button>
-              )}
+              {CallToAction}
             </Grid>
           </Grid>
 
