@@ -120,7 +120,7 @@ class ManageResourcePage extends React.Component {
                 <TableCell>Rewards</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody stripedRows={true}>
+            <TableBody>
               <TableRow>
                 <TableCell>2</TableCell>
                 <TableCell>Donut Bush</TableCell>
