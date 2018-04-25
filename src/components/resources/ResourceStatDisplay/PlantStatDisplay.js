@@ -12,7 +12,7 @@ const PlantStatDisplay = ({ resource }) => {
       <LinearProgress
         variant="determinate"
         min={0}
-        value={resource.stats.water || 0}
+        value={resource.stats.waterLevel || 0}
         max={100}
       />
     </Grid>

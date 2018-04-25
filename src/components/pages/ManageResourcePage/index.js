@@ -139,17 +139,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onAddWaterSelected: (resourceId) => {
-    // TODO: Fix bug in plant water stat increase; bar not incrementing
-    /*
     const increasePlantWaterStatAction = resourceStatChanged(
       resourceId, STAT_WATER_LEVEL, WATER_AMOUNT, STAT_OPERATOR_ADD);
-    */
 
     const decreaseWaterResource = resourceStatChanged(
       'water', 'amount', WATER_AMOUNT, STAT_OPERATOR_SUBTRACT
     );
 
-    // dispatch(increasePlantWaterStatAction);
+    dispatch(increasePlantWaterStatAction);
     dispatch(decreaseWaterResource);
   }
 });

@@ -7,7 +7,8 @@ export const RESOURCE_ACQUIRED = 'acquired';
 export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
-export const STAT_WATER_LEVEL = 'water';
+export const STAT_XP_LEVEL = 'level';
+export const STAT_WATER_LEVEL = 'waterLevel';
 export const STAT_OPERATOR_SET = 'setStatEquals';
 export const STAT_OPERATOR_ADD = 'incrementStat';
 export const STAT_OPERATOR_SUBTRACT = 'decrementStat';
