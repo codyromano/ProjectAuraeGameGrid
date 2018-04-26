@@ -8,6 +8,12 @@ import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
 import { Link } from 'react-router-dom';
 import { routePaths } from 'aurae-routes';
+import Dialog, {
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from 'material-ui/Dialog';
 
 import Table, {
   TableBody,
@@ -30,7 +36,27 @@ import {
 // TODO: Should user dictate amount?
 const WATER_AMOUNT = 25;
 
+// TODO: Import from reducer
+const PLANT_MAX_LEVEL = 3;
+
 class ManageResourcePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleConfirmHarvest = this.handleConfirmHarvest.bind(this);
+
+    this.state = {
+      confirmHarvestModalOpen: false
+    };
+  }
+  handleClose() {
+    this.setState({
+      confirmHarvestModalOpen: false
+    });
+  }
+  handleConfirmHarvest() {
+    // TODO: Redirect to animation screen
+  }
   renderAllocateWaterButton() {
     const { id } = this.props.resource;
 
@@ -96,8 +122,44 @@ class ManageResourcePage extends React.Component {
 
           <Grid container spacing={16}>
             <Grid item>
-              <Button variant="raised">Harvest</Button>
+              <Button
+                variant="raised"
+                onClick={() => this.setState({
+                  confirmHarvestModalOpen: true
+                })}
+              >Harvest</Button>
             </Grid>
+
+            <Dialog open={this.state.confirmHarvestModalOpen}
+              onClose={this.handleClose}>
+              <DialogTitle>
+                Confirm Harvest
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  <p>This will <strong>permanently</strong> remove the {resource.title} from your garden.
+                  You may be rewarded with a <strong>treat</strong>.</p>
+
+                  {/*
+                  {resource.stats.level < PLANT_MAX_LEVEL && (
+                    <p><strong>Tip:</strong> This plant is Level {resource.stats.level}.
+                    Wait until it evolves to get a better reward...</p>
+                  )}
+                  */}
+
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose}>
+                  Cancel
+                </Button>
+                <Button color="primary" onClick={this.handleConfirmHarvest}>
+                  Harvest
+                  <img style={{paddingLeft: '0.5rem', width: '1rem'}} alt={resource.description} src={resource.imageSrc} />
+                </Button>
+              </DialogActions>
+            </Dialog>
+
             <Grid item>
               {CallToAction}
             </Grid>
