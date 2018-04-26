@@ -28,7 +28,7 @@ import {
 } from 'aurae-actions';
 
 // TODO: Should user dictate amount?
-const WATER_AMOUNT = 5;
+const WATER_AMOUNT = 25;
 
 class ManageResourcePage extends React.Component {
   renderAllocateWaterButton() {
@@ -90,15 +90,14 @@ class ManageResourcePage extends React.Component {
             src={resource.imageSrcFull} />
           <ResourceStatDisplay resource={resource} />
 
-          <p>Water your Sugar Sprout to <strong>evolve</strong> it into
-          a <strong>Donut Bush</strong>.</p>
+          <p><strong>Water</strong> your {resource.title} to evolve it into
+          a bigger plant. <strong>Harvest</strong> the plant to earn rewards.</p>
+
 
           <Grid container spacing={16}>
-            {/*
             <Grid item>
-              <Button variant="raised">Customize</Button>
+              <Button variant="raised">Harvest</Button>
             </Grid>
-            */}
             <Grid item>
               {CallToAction}
             </Grid>

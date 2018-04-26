@@ -17,7 +17,9 @@ const initialState = {
       iconSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-icon-water.jpeg',
       iconAlt: 'Water currency',
       stats: {
-        amount: 0
+        // Give the player some initial water to get started
+        // learning about the game even if it's not raining
+        amount: 100
       }
     },
     seeds: {
