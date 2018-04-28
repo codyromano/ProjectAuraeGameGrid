@@ -10,8 +10,8 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(
-  applyMiddleware(),
-  persistState()
+  applyMiddleware()
+  // persistState()
 );
 
 const store = createStore(

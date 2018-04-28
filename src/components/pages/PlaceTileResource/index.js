@@ -88,7 +88,7 @@ PlaceTileResource.propTypes = {
 
 const mapStateToProps = (state) => ({
   selectedCoords: state.currentTile.coords,
-  gameItems: state.gameItems
+  gameItems: state.gameItems.filter(item => item.stats.level === 1)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

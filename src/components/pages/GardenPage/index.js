@@ -75,7 +75,7 @@ GardenPage.contextTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { tileInnerContentMap } = state.currentTile;
+  const { tileInnerContentMap } = state.resources.byPosition;
 
   let hasPlants = false;
 

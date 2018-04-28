@@ -79,8 +79,8 @@ const mapStateToProps = (state, ownProps) => {
     .map(id => gameGridComponentFactory(state.resources.byId[id]));
 
   return {
-    innerComponents,
-    selectedCoords: state.currentTile.coords
+    innerComponents
+    // selectedCoords: state.currentTile.coords
   };
 };
 

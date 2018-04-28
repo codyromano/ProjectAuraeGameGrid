@@ -80,18 +80,10 @@ class GameGrid extends React.Component {
   }
 }
 
-GameGrid.propTypes = {
-  selectedTile: PropTypes.arrayOf(PropTypes.number).isRequired
-};
-
 GameGrid.contextTypes = {
   // TODO: Don't statically reference the store
   // TODO: Define shape specifically
   store: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  selectedTile: state.currentTile.coords
-});
-
-export default connect(mapStateToProps)(GameGrid);
+export default connect()(GameGrid);

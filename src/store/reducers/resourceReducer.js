@@ -56,6 +56,8 @@ export default function resourceReducer(
 ) {
   let newState = clone(state);
   const actionCopy = clone(action);
+  // let newState = state;
+  // const actionCopy = action;
 
   switch (action.type) {
     case RESOURCE_ACQUIRED:
@@ -72,7 +74,7 @@ export default function resourceReducer(
 
       newState.byId[id].id = id;
       newState.byId[id].timeCreated = new Date().getTime();
-      newState.byId[id].stats = newState.byId[id].stats || {};
+      newState.byId[id].stats = actionCopy.resource.stats;
       newState.byId[id].class = actionCopy.class;
 
       // If the resource doesn't already exist, create a mapping of its

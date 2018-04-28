@@ -3,10 +3,14 @@ import { CLASS_CURRENCY, CLASS_PLANT } from 'aurae-resource-classes';
 // Actions
 export const TILE_SELECTED = 'tileSelected';
 export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
+export const RESOURCE_EVOLVED = 'resourceEvolved';
 export const RESOURCE_ACQUIRED = 'acquired';
 export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
+// Statistical attributes
+export const WATER_AMOUNT = 25;
+export const STAT_MAX_WATER_LEVEL = 100;
 export const STAT_XP_LEVEL = 'level';
 export const STAT_WATER_LEVEL = 'waterLevel';
 export const STAT_OPERATOR_SET = 'setStatEquals';

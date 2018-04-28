@@ -2,27 +2,19 @@ import {
   CLASS_PLANT,
   CLASS_CURRENCY
 } from 'aurae-resource-classes';
-import { STAT_WATER_LEVEL, STAT_XP_LEVEL } from 'aurae-actions';
+// import { STAT_WATER_LEVEL } from 'aurae-actions';
 import { serializeGameObjectLocation } from '../../gameDataUtils';
-
-const initialAttributes = {
-  [CLASS_PLANT]: {
-    stats: {
-      [STAT_WATER_LEVEL]: 0,
-      [STAT_XP_LEVEL]: 1
-    }
-  },
-  [CLASS_CURRENCY]: {}
-};
 
 // Apply logic specific to each resource class
 const resourceHandlers = {
   [CLASS_PLANT]: (id) => (state, action) => {
-    Object.assign(state.byId[id], initialAttributes[CLASS_PLANT]);
-
     const mapLocationKey = serializeGameObjectLocation(action.selectedCoords);
     state.byPosition[mapLocationKey] = state.byPosition[mapLocationKey] || [];
-    state.byPosition[mapLocationKey].push(id);
+
+    if (!state.byId[id].mapLocation) {
+      state.byId[id].mapLocation = action.selectedCoords;
+      state.byPosition[mapLocationKey].push(id);
+    }
 
     return state;
   },

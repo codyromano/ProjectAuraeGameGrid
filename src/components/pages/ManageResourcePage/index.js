@@ -3,17 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
-import { Link } from 'react-router-dom';
-import { routePaths } from 'aurae-routes';
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from 'material-ui/Dialog';
+import resourceTypes from 'aurae-config/resourceTypes';
 
 import Table, {
   TableBody,
@@ -26,28 +18,43 @@ import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay'
 import BasePage from 'aurae-components/pages/BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
-import {
-  STAT_WATER_LEVEL,
-  STAT_OPERATOR_ADD,
-  STAT_OPERATOR_SUBTRACT,
-  resourceStatChanged
-} from 'aurae-actions';
+import * as actions from 'aurae-actions';
+import ManageResourceActions from './ManageResourceActions';
 
-// TODO: Should user dictate amount?
-const WATER_AMOUNT = 25;
-
-// TODO: Import from reducer
-const PLANT_MAX_LEVEL = 3;
+function getEvolvedResource(possibleNextItems, entropy) {
+  for (const item of possibleNextItems) {
+    if (item.probability <= entropy) {
+      return item;
+    }
+  }
+  // Fall back to the most common resource
+  const mostCommonResource = possibleNextItems.sort(
+    (itemA, itemB) => itemA.probability > itemB.probability
+  )[0];
+  return mostCommonResource;
+}
 
 class ManageResourcePage extends React.Component {
   constructor(props) {
     super(props);
     this.handleClose = this.handleClose.bind(this);
     this.handleConfirmHarvest = this.handleConfirmHarvest.bind(this);
+    this.onEvolution = this.onEvolution.bind(this);
 
     this.state = {
       confirmHarvestModalOpen: false
     };
+  }
+  onEvolution() {
+    // Select a random plant into which the current plant should evolve
+    const nextItemId = getEvolvedResource(
+      this.props.evolvesIntoItems, Math.random()).childId;
+    const nextItem = resourceTypes.find(
+      item => item.resourceTypeId === nextItemId);
+
+    // Maintain the current id and map location
+    nextItem.id = this.props.resource.id;
+    this.props.evolveResource(nextItem, this.props.resource.mapLocation);
   }
   handleClose() {
     this.setState({
@@ -56,26 +63,6 @@ class ManageResourcePage extends React.Component {
   }
   handleConfirmHarvest() {
     // TODO: Redirect to animation screen
-  }
-  renderAllocateWaterButton() {
-    const { id } = this.props.resource;
-
-    return (<Button
-      variant="raised"
-      color="primary"
-      onClick={() => {
-        this.props.onAddWaterSelected(id)
-    }}>Add water</Button>);
-  }
-  renderCollectWaterButton() {
-    return (
-      <Link to={routePaths.WEATHER_PAGE}>
-        <Button
-          variant="raised"
-          color="primary"
-        >Collect water</Button>
-      </Link>
-    );
   }
   render() {
     const { resource } = this.props;
@@ -96,10 +83,6 @@ class ManageResourcePage extends React.Component {
       width: '100%'
     };
 
-    const CallToAction = this.props.water >= WATER_AMOUNT ?
-      this.renderAllocateWaterButton() :
-      this.renderCollectWaterButton();
-
     return (
       <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
@@ -119,51 +102,16 @@ class ManageResourcePage extends React.Component {
           <p><strong>Water</strong> your {resource.title} to evolve it into
           a bigger plant. <strong>Harvest</strong> the plant to earn rewards.</p>
 
-
-          <Grid container spacing={16}>
-            <Grid item>
-              <Button
-                variant="raised"
-                onClick={() => this.setState({
-                  confirmHarvestModalOpen: true
-                })}
-              >Harvest</Button>
-            </Grid>
-
-            <Dialog open={this.state.confirmHarvestModalOpen}
-              onClose={this.handleClose}>
-              <DialogTitle>
-                Confirm Harvest
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  <p>This will <strong>permanently</strong> remove the {resource.title} from your garden.
-                  You may be rewarded with a <strong>treat</strong>.</p>
-
-                  {/*
-                  {resource.stats.level < PLANT_MAX_LEVEL && (
-                    <p><strong>Tip:</strong> This plant is Level {resource.stats.level}.
-                    Wait until it evolves to get a better reward...</p>
-                  )}
-                  */}
-
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose}>
-                  Cancel
-                </Button>
-                <Button color="primary" onClick={this.handleConfirmHarvest}>
-                  Harvest
-                  <img style={{paddingLeft: '0.5rem', width: '1rem'}} alt={resource.description} src={resource.imageSrc} />
-                </Button>
-              </DialogActions>
-            </Dialog>
-
-            <Grid item>
-              {CallToAction}
-            </Grid>
-          </Grid>
+          <ManageResourceActions
+            resource={resource}
+            water={this.props.water}
+            onAddWaterSelected={this.props.onAddWaterSelected}
+            onEvolution={this.onEvolution}
+            confirmModalOpen={this.state.confirmHarvestModalOpen}
+            onConfirmHarvestClicked={() => this.setState({
+              confirmHarvestModalOpen: true
+            })}
+          />
 
           {/* TODO: Remove inline style */}
           <Divider style={{margin: '1.5rem 0'}} />
@@ -210,23 +158,39 @@ ManageResourcePage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const { resourceId } = ownProps.match.params;
+
+  let evolvesIntoItems = state.resources.byId[resourceId];
+  if (state.resources.byId[resourceId]) {
+    evolvesIntoItems = state.resources.byId[resourceId].evolvesInto;
+  }
+
   return {
     water: state.resources.byId['water'].stats.amount,
-    resource: state.resources.byId[resourceId]
+    resource: state.resources.byId[resourceId],
+    evolvesIntoItems
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   onAddWaterSelected: (resourceId) => {
-    const increasePlantWaterStatAction = resourceStatChanged(
-      resourceId, STAT_WATER_LEVEL, WATER_AMOUNT, STAT_OPERATOR_ADD);
+    const increasePlantWaterStatAction = actions.resourceStatChanged(
+      resourceId,
+      actions.STAT_WATER_LEVEL,
+      actions.WATER_AMOUNT,
+      actions.STAT_OPERATOR_ADD
+    );
 
-    const decreaseWaterResource = resourceStatChanged(
-      'water', 'amount', WATER_AMOUNT, STAT_OPERATOR_SUBTRACT
+    const decreaseWaterResource = actions.resourceStatChanged(
+      'water', 'amount', actions.WATER_AMOUNT, actions.STAT_OPERATOR_SUBTRACT
     );
 
     dispatch(increasePlantWaterStatAction);
     dispatch(decreaseWaterResource);
+  },
+  evolveResource: (resource, coords) => {
+    dispatch(
+      actions.plantResourceAcquired(resource, coords)
+    )
   }
 });
 
