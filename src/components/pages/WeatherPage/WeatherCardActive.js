@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
-import { currencyResourceAcquired } from 'aurae-actions';
+import { currencyResourceAcquired } from 'aurae-store/actions';
 import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 
 const WeatherCardActive = ({

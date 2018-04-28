@@ -9,7 +9,7 @@ import './BasePage.css';
 import TabsMenu from 'aurae-components/navigation/TabsMenu';
 import tabsMenuConfig from 'aurae-config/tabsMenuConfig';
 import { GET_CURRENT_WEATHER } from 'aurae-config/endpoints';
-import { weatherDataFetched } from 'aurae-actions';
+import { weatherDataFetched } from 'aurae-store/actions';
 import ReduxFetch from 'aurae-components/data-providers/ReduxFetch';
 import CurrencyDisplay from 'aurae-components/resources/CurrencyDisplay';
 

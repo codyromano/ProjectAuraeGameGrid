@@ -19,7 +19,7 @@ import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay'
 import BasePage from 'aurae-components/pages/BasePage';
 import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
-import * as actions from 'aurae-actions';
+import * as actions from 'aurae-store/actions';
 import ManageResourceActions from './ManageResourceActions';
 
 class ManageResourcePage extends React.Component {

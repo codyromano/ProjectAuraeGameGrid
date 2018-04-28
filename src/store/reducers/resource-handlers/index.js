@@ -1,7 +1,7 @@
 import {
   CLASS_PLANT,
   CLASS_CURRENCY
-} from 'aurae-resource-classes';
+} from 'aurae-config/resourceClasses';
 import { serializeGameObjectLocation } from '../../gameDataUtils';
 
 // Apply logic specific to each resource class

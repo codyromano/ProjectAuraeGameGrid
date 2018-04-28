@@ -1,4 +1,4 @@
-import { CLASS_CURRENCY, CLASS_PLANT } from 'aurae-resource-classes';
+import { CLASS_CURRENCY, CLASS_PLANT } from 'aurae-config/resourceClasses';
 
 // Actions
 export const TILE_SELECTED = 'tileSelected';

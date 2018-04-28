@@ -3,8 +3,8 @@ import clone from 'clone';
 import {
   RESOURCE_STAT_CHANGED,
   RESOURCE_ACQUIRED
-} from 'aurae-actions';
-import { CLASS_CURRENCY } from 'aurae-resource-classes';
+} from 'aurae-store/actions/index';
+import { CLASS_CURRENCY } from 'aurae-config/resourceClasses';
 import { resourceHandlerFactory } from './resource-handlers';
 import resourceStatReducer from './resourceStatReducer';
 

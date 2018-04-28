@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import './currencyDisplay.css';
-import { CLASS_CURRENCY } from 'aurae-resource-classes';
+import { CLASS_CURRENCY } from 'aurae-config/resourceClasses';
 
 const gridContainerProps = {
   container: true,

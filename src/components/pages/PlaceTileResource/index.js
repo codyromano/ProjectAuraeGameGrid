@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { plantResourceAcquired } from 'aurae-actions';
+import { plantResourceAcquired } from 'aurae-store/actions';
 import BasePage from '../BasePage';
 import { routePaths } from '../../../routes';
 import { withRouter } from 'react-router';

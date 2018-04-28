@@ -1,6 +1,6 @@
 import React from 'react';
 import { resourceShape } from 'aurae-common-shapes';
-import { CLASS_PLANT } from 'aurae-resource-classes';
+import { CLASS_PLANT } from 'aurae-config/resourceClasses';
 import PlantStatDisplay from './PlantStatDisplay';
 
 const mapResourceClassToView = {

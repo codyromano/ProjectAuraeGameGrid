@@ -11,7 +11,7 @@ import Dialog, {
   DialogContentText,
   DialogActions,
 } from 'material-ui/Dialog';
-import { WATER_AMOUNT } from 'aurae-actions';
+import { WATER_AMOUNT } from 'aurae-store/actions';
 
 const AllocateWaterButton = ({ resource, onAddWaterSelected }) => (<Button
     variant="raised"
