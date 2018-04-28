@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
+import randomWeightedChoice from 'weighted';
 import resourceTypes from 'aurae-config/resourceTypes';
 
 import Table, {
@@ -20,7 +21,6 @@ import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import * as actions from 'aurae-actions';
 import ManageResourceActions from './ManageResourceActions';
-import randomWeightedChoice from 'aurae-utils/randomWeightedChoice';
 
 class ManageResourcePage extends React.Component {
   constructor(props) {
@@ -36,7 +36,9 @@ class ManageResourcePage extends React.Component {
   onEvolution() {
     // Select a random plant into which the current plant should evolve
     const nextItemId = randomWeightedChoice(
-      this.props.evolvesIntoItems).childId;
+      this.props.evolvesIntoItems,
+      this.props.evolvesIntoItems.map(item => item.weight)
+    ).childId;
     const nextItem = resourceTypes.find(
       item => item.resourceTypeId === nextItemId);
 
