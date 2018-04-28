@@ -4,6 +4,7 @@ const aliases = {
   'aurae-reducers': 'src/store/reducers',
   'aurae-actions': 'src/store/actions',
   'aurae-config': 'src/config',
+  'aurae-utils': 'src/utils',
   'aurae-components': 'src/components',
   'aurae-pages': 'src/components/pages',
   'aurae-common-shapes': 'src/components/commonShapes',

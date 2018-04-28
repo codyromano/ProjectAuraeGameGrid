@@ -20,19 +20,7 @@ import { PageWidthContainer } from '../../layout';
 import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import * as actions from 'aurae-actions';
 import ManageResourceActions from './ManageResourceActions';
-
-function getEvolvedResource(possibleNextItems, entropy) {
-  for (const item of possibleNextItems) {
-    if (item.probability <= entropy) {
-      return item;
-    }
-  }
-  // Fall back to the most common resource
-  const mostCommonResource = possibleNextItems.sort(
-    (itemA, itemB) => itemA.probability > itemB.probability
-  )[0];
-  return mostCommonResource;
-}
+import randomWeightedChoice from 'aurae-utils/randomWeightedChoice';
 
 class ManageResourcePage extends React.Component {
   constructor(props) {
@@ -47,8 +35,8 @@ class ManageResourcePage extends React.Component {
   }
   onEvolution() {
     // Select a random plant into which the current plant should evolve
-    const nextItemId = getEvolvedResource(
-      this.props.evolvesIntoItems, Math.random()).childId;
+    const nextItemId = randomWeightedChoice(
+      this.props.evolvesIntoItems).childId;
     const nextItem = resourceTypes.find(
       item => item.resourceTypeId === nextItemId);
 

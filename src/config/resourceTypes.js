@@ -8,7 +8,7 @@ const resourceTypes = [
     evolvesInto: [
       {
         childId: 'sugarOak',
-        probability: 1
+        weight: 1
       }
     ],
     evolveSound: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/plant-evolved.mp3',
