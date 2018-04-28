@@ -7,7 +7,10 @@ import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import { currencyResourceAcquired } from 'aurae-actions';
 import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 
-const WeatherCardActive = ({ card }) => {
+const WeatherCardActive = ({
+  card,
+  currencyResourceAcquired
+}) => {
   return (<Card key={card.title}>
     <CardHeader
       title={card.title}
@@ -24,7 +27,7 @@ const WeatherCardActive = ({ card }) => {
       <Button
         variant="raised"
         color="primary"
-        onClick={() => this.props.currencyResourceAcquired(
+        onClick={() => currencyResourceAcquired(
           card.id,
           card.intensity
         )}

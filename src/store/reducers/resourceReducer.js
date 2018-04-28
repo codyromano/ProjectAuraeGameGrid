@@ -67,14 +67,11 @@ export default function resourceReducer(
       const id = (typeof actionCopy.id !== 'undefined') ?
         actionCopy.id : uniqid();
 
-      newState.byId[id] = Object.assign(
-        newState.byId[id] || {},
-        actionCopy.resource
-      );
+      const resourceTemplate = newState.byId[id] || {};
+      newState.byId[id] = Object.assign(resourceTemplate, actionCopy.resource);
 
       newState.byId[id].id = id;
       newState.byId[id].timeCreated = new Date().getTime();
-      newState.byId[id].stats = actionCopy.resource.stats;
       newState.byId[id].class = actionCopy.class;
 
       // If the resource doesn't already exist, create a mapping of its
