@@ -1,9 +1,12 @@
+import { CLASS_PLANT } from 'aurae-config/resourceClasses';
+
 /**
 * Defines the text, graphic and initial stats for game items.
 * This information does not change.
 */
 const resourceTypes = [
   {
+    class: CLASS_PLANT,
     resourceTypeId: 'sweetSprout',
     evolvesInto: [
       {
@@ -25,6 +28,7 @@ const resourceTypes = [
     }
   },
   {
+    class: CLASS_PLANT,
     resourceTypeId: 'sugarOak',
     evolvesInto: [],
     evolveSound: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/plant-evolved.mp3',
@@ -39,6 +43,7 @@ const resourceTypes = [
     }
   },
   {
+    class: CLASS_PLANT,
     resourceTypeId: 'steamBean',
     evolvesInto: [],
     evolveSound: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/plant-evolved.mp3',

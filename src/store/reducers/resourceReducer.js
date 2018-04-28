@@ -67,13 +67,6 @@ export default function resourceReducer(
       const id = (typeof actionCopy.id !== 'undefined') ?
         actionCopy.id : uniqid();
 
-      const resourceTemplate = newState.byId[id] || {};
-      newState.byId[id] = Object.assign(resourceTemplate, actionCopy.resource);
-
-      newState.byId[id].id = id;
-      newState.byId[id].timeCreated = new Date().getTime();
-      newState.byId[id].class = actionCopy.class;
-
       // If the resource doesn't already exist, create a mapping of its
       // id and class attributes. This allows components to
       // look up the resource.
@@ -82,6 +75,13 @@ export default function resourceReducer(
         newState.byClass[actionCopy.class] = newState.byClass[actionCopy.class] || [];
         newState.byClass[actionCopy.class].push(id);
       }
+
+      const resourceTemplate = newState.byId[id] || {};
+      newState.byId[id] = Object.assign(resourceTemplate, actionCopy.resource);
+
+      newState.byId[id].id = id;
+      newState.byId[id].timeCreated = new Date().getTime();
+      newState.byId[id].class = actionCopy.class;
 
       const applyResourceClassLogic = resourceHandlerFactory(actionCopy.class, id);
       newState = applyResourceClassLogic(newState, actionCopy);
