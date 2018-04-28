@@ -3,21 +3,13 @@ import * as pages from 'aurae-pages';
 import { routePaths } from './routes';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
-import { createStore, compose, applyMiddleware } from 'redux';
-import persistState from 'redux-localstorage'
-import primaryReducer from 'aurae-reducers/primaryReducer';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import storeFactory from 'aurae-store/storeFactory';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(
-  applyMiddleware()
-  // persistState()
-);
-
-const store = createStore(
-  primaryReducer,
-  enhancer
-);
+const store = storeFactory({
+  useLocalStorageMiddleware: false,
+  useReduxDevTools: false
+});
 
 // TODO: Generate route hierarchy from config file
 render(
