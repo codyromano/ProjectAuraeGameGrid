@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { plantResourceAcquired } from 'aurae-store/actions';
 import BasePage from '../BasePage';
-import { routePaths } from '../../../routes';
+import routePaths from 'aurae-config/routePaths';
 import { withRouter } from 'react-router';
 
 import { PageWidthContainer } from '../../layout';

@@ -1,4 +1,4 @@
-import { routePaths } from '../routes';
+import routePaths from 'aurae-config/routePaths';
 
 export const TAB_ID_GARDEN = 'garden';
 export const TAB_ID_WEATHER = 'weather';

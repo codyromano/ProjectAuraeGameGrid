@@ -3,7 +3,7 @@ import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { routePaths } from 'aurae-routes';
+import routePaths from 'aurae-config/routePaths';
 import { SoundEffect } from 'aurae-components/data-providers/WrappedWithSound';
 import Dialog, {
   DialogTitle,

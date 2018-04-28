@@ -1,9 +1,7 @@
-export const routePaths = {
-  WEATHER_PAGE: '/weather',
-  PLACE_RESOURCE: '/place',
-  MANAGE_RESOURCE: '/item/:resourceId',
-  VIEW_GARDEN: '/'
-};
+import React from 'react';
+import * as pages from 'aurae-pages';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import routePaths from 'aurae-config/routePaths';
 
 export const routerRedirector = (history) => ({
   placeTileResource() {
@@ -17,3 +15,14 @@ export const routerRedirector = (history) => ({
     history.push(path);
   }
 });
+
+export const AppRoutes = () => (
+  <HashRouter>
+    <Switch>
+      <Route path={routePaths.PLACE_RESOURCE} exact={true} component={pages.PlaceTileResource} />
+      <Route path={routePaths.WEATHER_PAGE} exact={true} component={pages.WeatherPage} />
+      <Route path={routePaths.MANAGE_RESOURCE} exact={true} component={pages.ManageResourcePage} />
+      <Route path={routePaths.TILE_MAP} component={pages.GardenPage} />
+    </Switch>
+  </HashRouter>
+);
