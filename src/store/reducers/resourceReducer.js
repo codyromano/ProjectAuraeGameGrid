@@ -19,7 +19,7 @@ const initialState = {
       stats: {
         // Give the player some initial water to get started
         // learning about the game even if it's not raining
-        amount: 100
+        amount: 200
       }
     },
     seeds: {
