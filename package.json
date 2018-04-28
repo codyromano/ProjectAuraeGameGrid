@@ -31,6 +31,7 @@
     "fast-deep-equal": "1.1.0",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
+    "hoek": "^5.0.3",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "material-components-web": "^0.34.1",
