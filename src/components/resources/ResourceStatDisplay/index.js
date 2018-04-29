@@ -1,5 +1,5 @@
 import React from 'react';
-import { resourceShape } from 'aurae-common-shapes';
+import { resourceShape } from 'aurae-components/commonShapes';
 import { CLASS_PLANT } from 'aurae-config/resourceClasses';
 import PlantStatDisplay from './PlantStatDisplay';
 

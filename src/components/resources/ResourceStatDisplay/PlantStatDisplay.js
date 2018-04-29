@@ -1,5 +1,5 @@
 import React from 'react';
-import { resourceShape } from 'aurae-common-shapes';
+import { resourceShape } from 'aurae-components/commonShapes';
 import { LinearProgress } from 'material-ui/Progress';
 import Grid from 'material-ui/Grid';
 
