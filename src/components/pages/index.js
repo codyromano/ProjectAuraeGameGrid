@@ -1,3 +1,4 @@
+export {default as BasePage} from './BasePage';
 export {default as PlaceTileResource} from './PlaceTileResource';
 export {default as ManageResourcePage} from './ManageResourcePage';
 export {default as GardenPage} from './GardenPage';

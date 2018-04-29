@@ -4,21 +4,11 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Chip from 'material-ui/Chip';
-import Divider from 'material-ui/Divider';
 import randomWeightedChoice from 'weighted';
 import resourceTypes from 'aurae-config/resourceTypes';
 
-import Table, {
-  TableBody,
-  TableHead,
-  TableCell,
-  TableRow
-} from 'material-ui/Table';
-
 import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay';
-import BasePage from 'aurae-components/pages/BasePage';
 import { PageWidthContainer } from '../../layout';
-import { TAB_ID_GARDEN } from 'aurae-config/tabsMenuConfig';
 import * as actions from 'aurae-store/actions';
 import ManageResourceActions from './ManageResourceActions';
 
@@ -58,11 +48,11 @@ class ManageResourcePage extends React.Component {
     const { resource } = this.props;
 
     if (!resource) {
-      return (<BasePage selectedTabId={TAB_ID_GARDEN}>
+      return (
         <PageWidthContainer>
           Resource not found
         </PageWidthContainer>
-      </BasePage>);
+      );
     }
 
     // TODO: Move to css
@@ -74,7 +64,6 @@ class ManageResourcePage extends React.Component {
     };
 
     return (
-      <BasePage selectedTabId={TAB_ID_GARDEN}>
         <PageWidthContainer>
           <Grid container spacing={16} alignItems="center">
             <Grid item>
@@ -102,40 +91,7 @@ class ManageResourcePage extends React.Component {
               confirmHarvestModalOpen: true
             })}
           />
-
-          {/* TODO: Remove inline style */}
-          <Divider style={{margin: '1.5rem 0'}} />
-
-          <h3>Next-level Perks</h3>
-
-          <p>As the plant evolves, your garden will grow bigger and more vibrant,
-          revealing new perks at local coffee shops and restaurants.</p>
-
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Level</TableCell>
-                <TableCell>Evolves into</TableCell>
-                <TableCell>Rewards</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>2</TableCell>
-                <TableCell>Donut Bush</TableCell>
-                <TableCell>Chance of a free pastry</TableCell>
-              </TableRow>
-
-              <TableRow>
-                <TableCell>3</TableCell>
-                <TableCell>Undiscovered</TableCell>
-                <TableCell>Undiscovered</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-
-        </PageWidthContainer>
-      </BasePage>
+      </PageWidthContainer>
     );
   }
 }

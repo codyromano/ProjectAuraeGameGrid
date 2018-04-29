@@ -6,8 +6,6 @@ import {
   getGameObjectsInPosition
 } from '../../../store/gameDataUtils';
 
-import BasePage from '../BasePage';
-
 import GameGrid from '../../../GameGrid';
 import GrassTile from '../../../GrassTile';
 
@@ -17,13 +15,14 @@ import './GardenPage.css';
 import { tileSelected } from 'aurae-store/actions';
 import { CLASS_PLANT } from 'aurae-config/resourceClasses';
 import { PageWidthContainer } from '../../layout';
-import { TAB_ID_GARDEN } from '../../../config/tabsMenuConfig';
 
 class GardenPage extends React.Component {
   constructor(props) {
     super(props);
     this.onGridTileSelected = this.onGridTileSelected.bind(this);
     this.redirector = routerRedirector(props.history);
+
+    console.log(props.location.pathname);
   }
   onGridTileSelected(coords) {
     const resources = this.props.getGameObjectsInPosition(coords);
@@ -43,19 +42,17 @@ class GardenPage extends React.Component {
   }
   render() {
     return (
-      <BasePage selectedTabId={TAB_ID_GARDEN}>
-        <PageWidthContainer>
-          <h1>{this.props.headerText}</h1>
+      <PageWidthContainer>
+        <h1>{this.props.headerText}</h1>
 
-          <GameGrid
-            defaultTileInnerContent={GrassTile}
-            onGridTileSelected={this.onGridTileSelected}
-            tileSize={5}
-            width={3}
-            height={4}
-          />
-        </PageWidthContainer>
-      </BasePage>
+        <GameGrid
+          defaultTileInnerContent={GrassTile}
+          onGridTileSelected={this.onGridTileSelected}
+          tileSize={5}
+          width={3}
+          height={4}
+        />
+      </PageWidthContainer>
     );
   }
 }

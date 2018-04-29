@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import TabWithNotices from './TabWithNotices';
+import routes from 'aurae-config/routes.json';
 
 const BasicTab = (props) => <Tab {...props} />;
 
@@ -13,16 +14,6 @@ class TabsMenu extends React.Component {
   }
   onChange(event, tabPathname) {
     this.props.history.push(tabPathname);
-  }
-  // https://material-ui-next.com/api/tabs/
-  getSelectedTabPathname() {
-    const selectedTabIndex = this.props.tabs.findIndex(
-      tab => tab.id === this.props.selectedTabId
-    );
-    if (selectedTabIndex === -1) {
-      return false;
-    }
-    return this.props.tabs[selectedTabIndex].pathname;
   }
   render() {
     const tabs = this.props.tabs.map((tab, key) => {
@@ -38,7 +29,7 @@ class TabsMenu extends React.Component {
         indicatorcolor="accent"
         textcolor="accent"
         onChange={this.onChange}
-        value={this.getSelectedTabPathname()}
+        value={routes.pages[this.props.routeId].path}
       >
         {tabs}
       </Tabs>
@@ -51,15 +42,13 @@ TabsMenu.defaultProps = {
 };
 
 TabsMenu.propTypes = {
-  isSelectedTab: PropTypes.func,
+  routeId: PropTypes.string.isRequired,
   onChange: PropTypes.func,
 
   // Provided
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-
-  selectedTabId: PropTypes.string.isRequired,
 
   tabs: PropTypes.arrayOf(
     PropTypes.shape({

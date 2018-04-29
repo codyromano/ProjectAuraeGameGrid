@@ -1,14 +1,15 @@
 import React from 'react';
-import * as pages from 'aurae-pages';
+import { BasePage } from 'aurae-pages';
+import clone from 'clone';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import routePaths from 'aurae-config/routePaths';
+import routes from 'aurae-config/routes';
 
 export const routerRedirector = (history) => ({
   placeTileResource() {
-    history.push(routePaths.PLACE_RESOURCE)
+    history.push(routes.pages.placeResource.path);
   },
   manageResource(resource) {
-    const path = routePaths.MANAGE_RESOURCE.replace(
+    const path = routes.pages.plant.path.replace(
       ':resourceId',
       resource.id
     );
@@ -16,15 +17,19 @@ export const routerRedirector = (history) => ({
   }
 });
 
-// TODO: Build routes from .json configuration
-export const AppRoutes = () => (
+export const AppRoutes = ({ routes }) => (
   <HashRouter>
     <Switch>
-      <Route path={routePaths.PLACE_RESOURCE} exact={true} component={pages.PlaceTileResource} />
-      <Route path={routePaths.WEATHER_PAGE} exact={true} component={pages.WeatherPage} />
-      <Route path={routePaths.MANAGE_RESOURCE} exact={true} component={pages.ManageResourcePage} />
-      <Route path={routePaths.TREATS} exact={true} component={pages.TreatsPage} />
-      <Route path={routePaths.TILE_MAP} component={pages.GardenPage} />
+      {routes.order.map(routeId => {
+        const route = clone(routes.pages[routeId]);
+        // Wrap each route in a component that provides a route Id. This lets
+        // components such as the TabsMenu identify the active route.
+        const WrappedComponent = (props) => {
+          return <BasePage {...props} routeId={routeId} />;
+        };
+        route.component = WrappedComponent;
+        return <Route key={routeId} {...route} />;
+      })}
     </Switch>
   </HashRouter>
 );

@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import BasePage from '../BasePage';
 import { PageWidthContainer } from '../../layout';
-import { TAB_ID_WEATHER } from '../../../config/tabsMenuConfig';
 import { FETCH_FAIL } from 'aurae-reducers/weatherReducer';
 import WeatherCardActive from './WeatherCardActive';
 import WeatherCardInactive from './WeatherCardInactive';
@@ -19,7 +17,7 @@ const Warning = ({ children }) => (
 class WeatherPage extends React.Component {
   render() {
     return (
-        <BasePage selectedTabId={TAB_ID_WEATHER}>
+        <div>
           {this.props.fetchProblem && (<Warning>
             We had trouble fetching the latest weather data. The information
             you see below might be a bit out of date.
@@ -32,7 +30,7 @@ class WeatherPage extends React.Component {
               return <Component key={card.id} card={card} />;
             })}
           </PageWidthContainer>
-      </BasePage>
+      </div>
     );
   }
 }
