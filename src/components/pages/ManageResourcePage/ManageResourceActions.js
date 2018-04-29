@@ -34,11 +34,13 @@ const CollectWaterButton = () => (
 );
 
 const EvolveButton = ({ onEvolution }) => (
-  <Button
-    onClick={() => onEvolution()}
-    variant="raised"
-    color="primary"
-  >Evolve</Button>
+  <SoundEffect audioUrl="https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/power-up.mp3">
+    <Button
+      onClick={() => onEvolution()}
+      variant="raised"
+      color="primary"
+    >Evolve</Button>
+  </SoundEffect>
 );
 
 const ManageResourceActions = ({
