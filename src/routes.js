@@ -16,12 +16,14 @@ export const routerRedirector = (history) => ({
   }
 });
 
+// TODO: Build routes from .json configuration
 export const AppRoutes = () => (
   <HashRouter>
     <Switch>
       <Route path={routePaths.PLACE_RESOURCE} exact={true} component={pages.PlaceTileResource} />
       <Route path={routePaths.WEATHER_PAGE} exact={true} component={pages.WeatherPage} />
       <Route path={routePaths.MANAGE_RESOURCE} exact={true} component={pages.ManageResourcePage} />
+      <Route path={routePaths.TREATS} exact={true} component={pages.TreatsPage} />
       <Route path={routePaths.TILE_MAP} component={pages.GardenPage} />
     </Switch>
   </HashRouter>
