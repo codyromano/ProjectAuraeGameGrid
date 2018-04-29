@@ -2,6 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import TabWithNotices from './TabWithNotices';
+
+const BasicTab = (props) => <Tab {...props} />;
 
 class TabsMenu extends React.Component {
   constructor(props) {
@@ -22,13 +25,11 @@ class TabsMenu extends React.Component {
     return this.props.tabs[selectedTabIndex].pathname;
   }
   render() {
-    const tabs = this.props.tabs.map(tab => (
-      <Tab
-        label={tab.label}
-        value={tab.pathname}
-        key={tab.pathname}
-      />
-    ));
+    const tabs = this.props.tabs.map((tab, key) => {
+      const Component = Number.isInteger(tab.notices) ?
+        TabWithNotices : BasicTab;
+      return <Component {...tab} key={tab.id} />;
+    });
 
     return (
       <Tabs
@@ -65,7 +66,8 @@ TabsMenu.propTypes = {
       id: PropTypes.string.isRequired,
       pathname: PropTypes.string.isRequired,
       value: PropTypes.string,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
+      notices: PropTypes.number
     })
   ).isRequired
 };
