@@ -18,6 +18,8 @@ const initialState = {
       id: 'water',
       isCurrentWeatherCondition: false,
       intensity: 0,
+      // TODO: Change adjective depending on weather conditions
+      intensityAdjective: 'light',
       intensityDescriptor: '{intensity}ml per hour',
       title: "It's raining!",
       description: `When it's raining in your area, you can collect water
@@ -60,6 +62,10 @@ export default function weatherReducer(state = initialState, action) {
   }
 
   const isRainy = weatherApiResponse.rainIntensity > 0;
+
+  if (isRainy && weatherApiResponse.summary.length) {
+    newState.byId['rain'].title = weatherApiResponse.summary;
+  }
 
   Object.assign(newState.byId['rain'], {
     isCurrentWeatherCondition: isRainy,

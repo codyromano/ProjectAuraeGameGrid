@@ -31,10 +31,10 @@ const WeatherCardActive = ({
           card.id,
           card.intensity
         )}
-        label={`Collect ${card.noun} (${card.intensity}ml)`}
+        label={`Collect ${card.intensityAdjective} ${card.noun}`}
         fullWidth={true}
       >
-        Collect {card.noun} ({card.intensity}ml)
+        Collect {card.intensityAdjective} {card.noun}
       </Button>
     </SoundEffect>
   </CardActions>
@@ -52,7 +52,8 @@ WeatherCardActive.propTypes = {
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
   currencyResourceAcquired: (weatherType, addAmount) => dispatch(
-    currencyResourceAcquired(weatherType, addAmount)
+    // TODO: Develop formula for mapping actual rainfall to currency amount
+    currencyResourceAcquired(weatherType, 50)
   )
 });
 
