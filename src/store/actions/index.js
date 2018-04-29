@@ -1,4 +1,4 @@
-import { CLASS_CURRENCY, CLASS_PLANT } from 'aurae-config/resourceClasses';
+import { CLASS_CURRENCY, CLASS_PLANT, CLASS_TREAT } from 'aurae-config/resourceClasses';
 
 // Actions
 export const TILE_SELECTED = 'tileSelected';
@@ -34,6 +34,20 @@ export const currencyResourceAcquired = (name, addAmount) => ({
   resource: {
     name,
     addAmount
+  }
+});
+
+export const treatResourceAcquired = ({
+  imageThumbSrc,
+  title,
+  description
+}) => ({
+  type: RESOURCE_ACQUIRED,
+  class: CLASS_TREAT,
+  resource: {
+    imageThumbSrc,
+    title,
+    description
   }
 });
 

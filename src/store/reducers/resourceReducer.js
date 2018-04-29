@@ -4,7 +4,7 @@ import {
   RESOURCE_STAT_CHANGED,
   RESOURCE_ACQUIRED
 } from 'aurae-store/actions/index';
-import { CLASS_CURRENCY } from 'aurae-config/resourceClasses';
+import { CLASS_CURRENCY, CLASS_TREAT } from 'aurae-config/resourceClasses';
 import { resourceHandlerFactory } from './resource-handlers';
 import resourceStatReducer from './resourceStatReducer';
 
@@ -44,7 +44,8 @@ const initialState = {
     }
   },
   byClass: {
-    [CLASS_CURRENCY]: ['water', 'seeds', 'gold']
+    [CLASS_CURRENCY]: ['water', 'seeds', 'gold'],
+    [CLASS_TREAT]: []
   },
   byPosition: {},
   allIds: []

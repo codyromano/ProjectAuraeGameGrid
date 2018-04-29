@@ -1,15 +1,17 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { Tab } from 'material-ui/Tabs';
+import { CLASS_TREAT } from 'aurae-config/resourceClasses';
+import { connect } from 'react-redux';
 import Chip from 'material-ui/Chip';
 import './TabsMenu.css';
 
 const TabWithNotices = (props) => {
   const extraClasses = {};
-  if (props.notices) {
+  if (props.totalUnreadNotices) {
     extraClasses.root = 'selectedLabel';
   }
-  const chip = <Chip classes={extraClasses} label={props.notices}/>;
+  const chip = <Chip classes={extraClasses} label={props.totalUnreadNotices}/>;
 
   return (<Tab
     {...props}
@@ -17,4 +19,16 @@ const TabWithNotices = (props) => {
   />);
 };
 
-export default TabWithNotices;
+const mapStateToProps = (state) => {
+  // Currently the notice consists only of treats, but this could be expanded
+  // for a more general purpose.
+  const notices = state.resources.byClass[CLASS_TREAT].map(id =>
+    state.resources.byId[id]
+  );
+  const totalUnreadNotices = notices.filter(
+    notice => !notice.seenByUser
+  ).length;
+
+  return { notices, totalUnreadNotices };
+};
+export default connect(mapStateToProps)(TabWithNotices);

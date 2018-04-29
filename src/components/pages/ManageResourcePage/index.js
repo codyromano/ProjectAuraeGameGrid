@@ -32,9 +32,16 @@ class ManageResourcePage extends React.Component {
     const nextItem = resourceTypes.find(
       item => item.resourceTypeId === nextItemId);
 
+    const treat = {
+      imageThumbSrc: '#',
+      title: 'Foo',
+      description: 'Bar'
+    };
+
     // Maintain the current id and map location
     nextItem.id = this.props.resource.id;
-    this.props.evolveResource(nextItem, this.props.resource.mapLocation);
+    this.props.evolveResource(nextItem,
+      this.props.resource.mapLocation, treat);
   }
   handleClose() {
     this.setState({
@@ -133,7 +140,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(increasePlantWaterStatAction);
     dispatch(decreaseWaterResource);
   },
-  evolveResource: (resource, coords) => {
+  evolveResource: (resource, coords, treat) => {
+    dispatch(
+      actions.treatResourceAcquired(treat)
+    );
     dispatch(
       actions.plantResourceAcquired(resource, coords)
     )

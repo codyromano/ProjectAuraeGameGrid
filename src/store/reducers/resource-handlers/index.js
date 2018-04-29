@@ -1,6 +1,7 @@
 import {
   CLASS_PLANT,
-  CLASS_CURRENCY
+  CLASS_CURRENCY,
+  CLASS_TREAT
 } from 'aurae-config/resourceClasses';
 import { serializeGameObjectLocation } from '../../gameDataUtils';
 
@@ -21,7 +22,9 @@ const resourceHandlers = {
   [CLASS_CURRENCY]: (id) => (state, action) => {
     state.byId[id].stats.amount += action.resource.addAmount;
     return state;
-  }
+  },
+
+  [CLASS_TREAT]: (id) => (state, action) => state
 };
 
 export const resourceHandlerFactory = (resourceClass, ...params) => {
