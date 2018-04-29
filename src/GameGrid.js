@@ -13,7 +13,7 @@ class GameGrid extends React.Component {
     onGridTileSelected: PropTypes.func.isRequired,
     defaultTileInnerContent: PropTypes.func,
     tileSize: PropTypes.number,
-    tileInnerContentMap: PropTypes.arrayOf(
+    tileInnerContentMap: PropTypes.objectOf(
       PropTypes.func
     )
   };

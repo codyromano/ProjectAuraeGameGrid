@@ -21,7 +21,9 @@ const AllocateWaterButton = ({ resource, onAddWaterSelected }) => (<Button
 
 AllocateWaterButton.propTypes = {
   onAddWaterSelected: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
+  resource: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const CollectWaterButton = () => (
