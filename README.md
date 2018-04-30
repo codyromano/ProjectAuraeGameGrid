@@ -1,11 +1,18 @@
-# Project Aurae Gameplay
+# Project Aurae
 
-Prototype for core gameplay
-![Beta view](https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/project-aurae.gif?cache=false)
+Project Aurae (working title) is a game that gives you free coffee and dessert when it's raining. Our mission is to make people feel better about bad weather.
+
+![](https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-evolution.gif)
+
+## How it works
+
+1. Plant items in your virtual garden.
+2. Rain in real life makes your plants grow.
+3. When a plant evolves, there's a chance you'll earn a treat. We partner with local businesses to offer you coffee and chocolate in bad weather.
 
 ## Getting started
 
-First set up the [simple-weather-service](https://github.com/codyromano/simple-weather-service), which provides current weather data.
+First, set up the [simple-weather-service](https://github.com/codyromano/simple-weather-service), which provides current weather data.
 
 After you have the service running, run this repo, which focuses on the UI:
 
