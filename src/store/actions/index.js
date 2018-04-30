@@ -6,6 +6,7 @@ export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
 export const RESOURCE_EVOLVED = 'resourceEvolved';
 export const RESOURCE_ACQUIRED = 'acquired';
 export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
+export const RESOURCE_SEEN_BY_USER = 'resourceSeenByUser';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
 
 // Statistical attributes
@@ -60,6 +61,11 @@ export const plantResourceAcquired = (resource, selectedCoords) => {
     resource
   });
 };
+
+export const userSawResources = (resourceIds) => ({
+  type: RESOURCE_SEEN_BY_USER,
+  resourceIds
+});
 
 export const resourceSelectionConfirmed = (resource) => {
   return ({

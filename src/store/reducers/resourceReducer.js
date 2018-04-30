@@ -2,6 +2,7 @@ import uniqid from 'uniqid';
 import clone from 'clone';
 import {
   RESOURCE_STAT_CHANGED,
+  RESOURCE_SEEN_BY_USER,
   RESOURCE_ACQUIRED
 } from 'aurae-store/actions/index';
 import { CLASS_CURRENCY, CLASS_TREAT } from 'aurae-config/resourceClasses';
@@ -90,6 +91,11 @@ export default function resourceReducer(
     break;
     case RESOURCE_STAT_CHANGED:
       newState = resourceStatReducer(newState, actionCopy);
+    break;
+    case RESOURCE_SEEN_BY_USER:
+      actionCopy.resourceIds.forEach(id => {
+        newState.byId[id].seenByUser = true;
+      });
     break;
     default:
     break;
