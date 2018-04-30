@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import pick from 'object.pick';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import TabWithNotices from './TabWithNotices';
-import routes from 'aurae-config/routes.json';
 
 const BasicTab = (props) => <Tab {...props} />;
 
@@ -17,9 +17,12 @@ class TabsMenu extends React.Component {
   }
   render() {
     const tabs = this.props.tabs.map((tab, key) => {
+      const componentProps = pick(tab, ['value', 'id', 'label', 'pathname']);
       const Component = Number.isInteger(tab.notices) ?
         TabWithNotices : BasicTab;
-      return <Component {...tab} key={tab.id} />;
+      return <Component
+        {...componentProps}
+      key={tab.id} />;
     });
 
     const selectedValue = this.props.tabs.find(

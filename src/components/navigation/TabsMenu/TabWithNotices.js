@@ -1,4 +1,5 @@
 import React from 'react';
+import pick from 'object.pick';
 // import PropTypes from 'prop-types';
 import { Tab } from 'material-ui/Tabs';
 import { CLASS_TREAT } from 'aurae-config/resourceClasses';
@@ -12,9 +13,11 @@ const TabWithNotices = (props) => {
     extraClasses.root = 'selectedLabel';
   }
   const chip = <Chip classes={extraClasses} label={props.totalUnreadNotices}/>;
+  const componentProps = pick(props,
+    ['value', 'id', 'label', 'pathname', 'onChange']);
 
   return (<Tab
-    {...props}
+    {...componentProps}
     indicator={chip}
   />);
 };
