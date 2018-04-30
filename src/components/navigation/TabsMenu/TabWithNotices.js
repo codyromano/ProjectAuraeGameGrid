@@ -14,7 +14,7 @@ const TabWithNotices = (props) => {
   }
   const chip = <Chip classes={extraClasses} label={props.totalUnreadNotices}/>;
   const componentProps = pick(props,
-    ['value', 'id', 'label', 'pathname', 'onChange']);
+    ['value', 'id', 'label', 'pathname', 'onChange', 'fullWidth']);
 
   return (<Tab
     {...componentProps}

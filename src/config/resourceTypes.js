@@ -45,7 +45,12 @@ const resourceTypes = [
   {
     class: CLASS_PLANT,
     resourceTypeId: 'steamBean',
-    evolvesInto: [],
+    evolvesInto: [
+      {
+        childId: 'gigaBean',
+        weight: 1
+      }
+    ],
     evolveSound: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/plant-evolved.mp3',
     title: 'Steam Bean',
     itemClassDescription: 'Coffee plant',
@@ -56,6 +61,21 @@ const resourceTypes = [
     imageSrcFull: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-image-steam-bean-full.gif',
     stats: {
       level: 1,
+      waterLevel: 0
+    }
+  },
+  {
+    class: CLASS_PLANT,
+    resourceTypeId: 'gigaBean',
+    evolvesInto: [],
+    evolveSound: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects/plant-evolved.mp3',
+    title: 'Gigabean',
+    itemClassDescription: 'Coffee plant',
+    fullDescription: `Coming soon`,
+    imageSrc: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-evolved-gigabean.png',
+    imageSrcFull: 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/resource-gigabean.gif',
+    stats: {
+      level: 2,
       waterLevel: 0
     }
   }
