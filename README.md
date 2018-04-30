@@ -2,7 +2,7 @@
 
 Project Aurae (working title) is a game that gives you free coffee and dessert when it's raining. Our mission is to make people feel better about bad weather.
 
-![](https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-evolution.gif)
+[Gameplay demo](https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/plant-evolution.gif)
 
 ## How it works
 
