@@ -22,6 +22,10 @@ class TabsMenu extends React.Component {
       return <Component {...tab} key={tab.id} />;
     });
 
+    const selectedValue = this.props.tabs.find(
+      tab => tab.relatedRouteIds[this.props.routeId]
+    ).value;
+
     return (
       <Tabs
         centered={true}
@@ -29,7 +33,7 @@ class TabsMenu extends React.Component {
         indicatorcolor="accent"
         textcolor="accent"
         onChange={this.onChange}
-        value={routes.pages[this.props.routeId].path}
+        value={selectedValue}
       >
         {tabs}
       </Tabs>
@@ -56,7 +60,10 @@ TabsMenu.propTypes = {
       pathname: PropTypes.string.isRequired,
       value: PropTypes.string,
       label: PropTypes.string.isRequired,
-      notices: PropTypes.number
+      notices: PropTypes.number,
+      relatedRouteIds: PropTypes.objectOf(
+        PropTypes.bool.isRequired
+      ).isRequired
     })
   ).isRequired
 };
