@@ -15,23 +15,45 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
 
 		<script>
-			var camera, scene, renderer;
+			var scene, renderer;
 			var mesh;
 			let spinRate = 0.01;
 			let intensityBoost = 0.01;
 
-			function getObjectsOnCoords(renderer, camera, objects, clientX, clientY) {
-				const mouse = new THREE.Vector2();
-				const raycaster = new THREE.Raycaster();
+			class AnimationContext {
+				constructor(el, width, height) {
+					this.el = el;
+					this.width = width;
+					this.height = height;
 
-		    mouse.x = ( clientX / renderer.domElement.clientWidth ) * 2 - 1;
-		    mouse.y = - ( clientY / renderer.domElement.clientHeight ) * 2 + 1;
+					this.renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
+					this.renderer.setPixelRatio( window.devicePixelRatio );
+					this.renderer.setSize( width, height );
 
-		    raycaster.setFromCamera(mouse, camera);
+					this.scene = new THREE.Scene();
+	        this.scene.background = new THREE.Color(0xffffff);
 
-		    const intersects = raycaster.intersectObjects( objects );
-				return intersects;
+					this.camera = new THREE.PerspectiveCamera( 70, width / height, 1, 1000 );
+					this.camera.position.z = 100;
+
+					this.getObjectsOnCoords = this.getObjectsOnCoords.bind(this);
+				}
+				getObjectsOnCoords(objects, clientX, clientY) {
+					const mouse = new THREE.Vector2();
+					const raycaster = new THREE.Raycaster();
+
+					mouse.x = ( clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+					mouse.y = - ( clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+
+					raycaster.setFromCamera(mouse, this.camera);
+
+					const intersects = raycaster.intersectObjects( objects );
+					return intersects;
+				}
 			}
+
+			const rootNode = document.querySelector('.container');
+			const appContext = new AnimationContext(rootNode, 1000, 1000);
 
       init(document.body, window.innerWidth, window.innerHeight, 0xffffff);
 			animate();
@@ -103,7 +125,7 @@
 			});
 
 			document.body.addEventListener('mousemove', (event) => {
-				const coords = getObjectsOnCoords(renderer, camera, [mesh], event.clientX, event.clientY);
+				const coords = appContext.getObjectsOnCoords([mesh], event.clientX, event.clientY);
 
 				if (coords.length) {
 					document.body.style.cursor = 'pointer';
