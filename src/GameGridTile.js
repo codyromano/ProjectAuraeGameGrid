@@ -41,7 +41,7 @@ const GameGridTile = ({
   }
 
   return (
-    <Grid item xs={4}
+    <Grid item xs={3}
       className={classList.join(' ')}
       onClick={(event) => onGridTileSelected(coords)}
     >

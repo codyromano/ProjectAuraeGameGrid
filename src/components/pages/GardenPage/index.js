@@ -48,9 +48,8 @@ class GardenPage extends React.Component {
         <GameGrid
           defaultTileInnerContent={GrassTile}
           onGridTileSelected={this.onGridTileSelected}
-          tileSize={5}
-          width={3}
-          height={4}
+          width={4}
+          height={5}
         />
       </PageWidthContainer>
     );

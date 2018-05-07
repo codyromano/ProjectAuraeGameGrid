@@ -51,7 +51,9 @@ const ManageResourceActions = ({
   onEvolution,
   resource,
   confirmModalOpen,
-  onConfirmHarvestClicked
+  onConfirmHarvestClicked,
+  onModalClosed,
+  onModalConfirmed
 }) => {
 
   const CallToAction = water >= WATER_AMOUNT ?
@@ -62,12 +64,12 @@ const ManageResourceActions = ({
     <Grid item>
       <Button
         variant="raised"
-        onClick={() => onConfirmHarvestClicked()}
+        onClick={onConfirmHarvestClicked}
       >Harvest</Button>
     </Grid>
 
     <Dialog open={confirmModalOpen}
-      onClose={this.handleClose}>
+      onClose={onModalClosed}>
       <DialogTitle>
         Confirm Harvest
       </DialogTitle>
@@ -78,10 +80,10 @@ const ManageResourceActions = ({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={this.handleClose}>
+        <Button onClick={onModalClosed}>
           Cancel
         </Button>
-        <Button color="primary" onClick={this.handleConfirmHarvest}>
+        <Button color="primary" onClick={onModalConfirmed}>
           Harvest
           <img style={{paddingLeft: '0.5rem', width: '1rem'}}
             alt={resource.description}
@@ -104,5 +106,15 @@ const ManageResourceActions = ({
     </Grid>
   </Grid>);
 };
+
+ManageResourceActions.defaultProps = {
+  onModalClosed: () => {},
+  onModalConfirmed: () => {}
+};
+
+ManageResourceActions.propTypes = {
+  onModalClosed: PropTypes.func.isRequired,
+  onModalConfirmed: PropTypes.func.isRequired
+}
 
 export default ManageResourceActions;

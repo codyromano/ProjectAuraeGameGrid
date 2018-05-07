@@ -6,7 +6,7 @@ import storeFactory from 'aurae-store/storeFactory';
 import routes from 'aurae-config/routes.json';
 
 const store = storeFactory({
-  useLocalStorageMiddleware: false,
+  useLocalStorageMiddleware: true,
   useReduxDevTools: true
 });
 

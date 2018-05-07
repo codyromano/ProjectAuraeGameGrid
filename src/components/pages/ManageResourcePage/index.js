@@ -18,6 +18,7 @@ class ManageResourcePage extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleConfirmHarvest = this.handleConfirmHarvest.bind(this);
     this.onEvolution = this.onEvolution.bind(this);
+    this.onHarvest = this.onHarvest.bind(this);
 
     this.state = {
       confirmHarvestModalOpen: false
@@ -32,16 +33,19 @@ class ManageResourcePage extends React.Component {
     const nextItem = resourceTypes.find(
       item => item.resourceTypeId === nextItemId);
 
+    // Maintain the current id and map location
+    nextItem.id = this.props.resource.id;
+    this.props.evolveResource(nextItem,
+      this.props.resource.mapLocation);
+  }
+  onHarvest() {
     const treat = {
       imageThumbSrc: '#',
       title: 'Foo',
       description: 'Bar'
     };
-
-    // Maintain the current id and map location
-    nextItem.id = this.props.resource.id;
-    this.props.evolveResource(nextItem,
-      this.props.resource.mapLocation, treat);
+    this.props.onHarvest(treat);
+    this.handleClose();
   }
   handleClose() {
     this.setState({
@@ -50,6 +54,7 @@ class ManageResourcePage extends React.Component {
   }
   handleConfirmHarvest() {
     // TODO: Redirect to animation screen
+
   }
   render() {
     const { resource } = this.props;
@@ -94,6 +99,8 @@ class ManageResourcePage extends React.Component {
             onAddWaterSelected={this.props.onAddWaterSelected}
             onEvolution={this.onEvolution}
             confirmModalOpen={this.state.confirmHarvestModalOpen}
+            onModalClosed={this.handleClose}
+            onModalConfirmed={this.onHarvest}
             onConfirmHarvestClicked={() => this.setState({
               confirmHarvestModalOpen: true
             })}
@@ -140,10 +147,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(increasePlantWaterStatAction);
     dispatch(decreaseWaterResource);
   },
-  evolveResource: (resource, coords, treat) => {
+  onHarvest: (treat) => {
     dispatch(
       actions.treatResourceAcquired(treat)
     );
+  },
+  evolveResource: (resource, coords, treat) => {
     dispatch(
       actions.plantResourceAcquired(resource, coords)
     )
