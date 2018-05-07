@@ -4,6 +4,9 @@ import { PageWidthContainer } from 'aurae-components/layout';
 import { userSawResources } from 'aurae-store/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import './WheelOfFortune.css';
+import Gift3DContainer from 'aurae-components/animation/Gift3DContainer';
+import Grid from 'material-ui/Grid';
 
 class TreatsPage extends React.Component {
   componentDidMount() {
@@ -12,11 +15,13 @@ class TreatsPage extends React.Component {
   }
   render = () => (
     <PageWidthContainer>
-      <ul>
+      <Grid container>
         {this.props.treats.map(treat => (
-          <li>{treat.title}</li>
+          <Grid item key={treat.title}>
+            <Gift3DContainer />
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </PageWidthContainer>
   )
 }
