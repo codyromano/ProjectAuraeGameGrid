@@ -3,11 +3,17 @@ import clone from 'clone';
 import {
   RESOURCE_STAT_CHANGED,
   RESOURCE_SEEN_BY_USER,
-  RESOURCE_ACQUIRED
+  RESOURCE_ACQUIRED,
+  RESOURCE_DELETED
 } from 'aurae-store/actions/index';
 import { CLASS_CURRENCY, CLASS_TREAT } from 'aurae-config/resourceClasses';
 import { resourceHandlerFactory } from './resource-handlers';
 import resourceStatReducer from './resourceStatReducer';
+
+const removeFromArray = (array, predicate) => {
+  const target = array.findIndex(predicate);
+  return array.splice(target, 1);
+};
 
 const initialState = {
   byId: {
@@ -87,6 +93,19 @@ export default function resourceReducer(
 
       const applyResourceClassLogic = resourceHandlerFactory(actionCopy.class, id);
       newState = applyResourceClassLogic(newState, actionCopy);
+
+    break;
+    case RESOURCE_DELETED:
+      const matchIdPredicate = id => id === action.resourceId;
+
+      delete newState.byId[action.resourceId];
+      removeFromArray(newState.allIds, matchIdPredicate);
+
+      // eslint-disable-next-line no-unused-vars
+      for (const [key, value] of Object.entries(newState.byPosition)) {
+        removeFromArray(value, matchIdPredicate);
+      }
+
 
     break;
     case RESOURCE_STAT_CHANGED:

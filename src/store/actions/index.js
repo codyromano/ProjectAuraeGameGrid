@@ -5,6 +5,7 @@ export const TILE_SELECTED = 'tileSelected';
 export const PLACE_RESOURCE_CONFIRMED = 'confirmed';
 export const RESOURCE_EVOLVED = 'resourceEvolved';
 export const RESOURCE_ACQUIRED = 'acquired';
+export const RESOURCE_DELETED = 'resourceDeleted';
 export const RESOURCE_STAT_CHANGED = 'resourceStatChanged';
 export const RESOURCE_SEEN_BY_USER = 'resourceSeenByUser';
 export const WEATHER_DATA_FETCHED = 'weatherFetched';
@@ -21,6 +22,11 @@ export const STAT_OPERATOR_SUBTRACT = 'decrementStat';
 export const tileSelected = (coords) => ({
   type: TILE_SELECTED,
   coords
+});
+
+export const resourceDeleted = (id) => ({
+  type: RESOURCE_DELETED,
+  resourceId: id
 });
 
 export const weatherDataFetched = (serverResponse) => ({

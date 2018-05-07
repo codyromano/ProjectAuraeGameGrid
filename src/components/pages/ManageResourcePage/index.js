@@ -6,6 +6,7 @@ import Grid from 'material-ui/Grid';
 import Chip from 'material-ui/Chip';
 import randomWeightedChoice from 'weighted';
 import resourceTypes from 'aurae-config/resourceTypes';
+import routes from 'aurae-config/routes.json';
 
 import ResourceStatDisplay from 'aurae-components/resources/ResourceStatDisplay';
 import { PageWidthContainer } from '../../layout';
@@ -44,8 +45,9 @@ class ManageResourcePage extends React.Component {
       title: 'Foo',
       description: 'Bar'
     };
-    this.props.onHarvest(treat);
+    this.props.onHarvest(this.props.resource.id, treat);
     this.handleClose();
+    this.props.history.push(routes.pages.garden.path);
   }
   handleClose() {
     this.setState({
@@ -147,7 +149,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(increasePlantWaterStatAction);
     dispatch(decreaseWaterResource);
   },
-  onHarvest: (treat) => {
+  onHarvest: (resourceId, treat) => {
+    dispatch(
+      actions.resourceDeleted(resourceId)
+    );
     dispatch(
       actions.treatResourceAcquired(treat)
     );
