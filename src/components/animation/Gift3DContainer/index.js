@@ -90,6 +90,7 @@ export default class GiftContainer extends React.Component {
           onMaxRotationSpeed={this.onRewardUnlocked}
           pixelWidth={125}
           pixelHeight={125}
+          {...this.props}
         />)}
         <Dialog open={this.state.maxRotation && !this.state.modalDismissed}>
           <DialogTitle>

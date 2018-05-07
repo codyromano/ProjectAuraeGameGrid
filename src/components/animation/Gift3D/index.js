@@ -11,7 +11,8 @@ import {
   MeshPhongMaterial,
   Mesh,
   Vector3,
-  SpotLight
+  SpotLight,
+  HemisphereLight
 } from 'three';
 
 export default class Gift3D extends React.Component {
@@ -85,17 +86,9 @@ export default class Gift3D extends React.Component {
 
     this.el.appendChild(this.renderer.domElement);
   }
-  createGiftModel() {
-    const texture = new TextureLoader().load(this.props.textureSrc);
-    const geometry = new BoxBufferGeometry( 125, 125, 125 );
-    const material = new MeshPhongMaterial( { map: texture } );
-
-    this.mesh = new Mesh(geometry, material);
-    this.mesh.position.z = -150;
-    this.scene.add(this.mesh);
-
+  addSpotlight() {
     const spotLight = new SpotLight( 0xffffff );
-    spotLight.position.set( 200, 100, 200 );
+    spotLight.position.set( 300, 300, 200 );
 
     spotLight.castShadow = true;
 
@@ -107,6 +100,20 @@ export default class Gift3D extends React.Component {
     spotLight.shadow.camera.fov = 20;
 
     this.scene.add(spotLight);
+  }
+  createGiftModel() {
+    const texture = new TextureLoader().load(this.props.textureSrc);
+    const geometry = new BoxBufferGeometry( 125, 125, 125 );
+    const material = new MeshPhongMaterial( { map: texture } );
+
+    this.mesh = new Mesh(geometry, material);
+    this.mesh.position.z = -150;
+    this.scene.add(this.mesh);
+
+    this.addSpotlight();
+
+    const light = new HemisphereLight( 0xffffff, 0x080820, 1 );
+    this.scene.add( light );
 
     this.camera.lookAt( new Vector3( 0, 0, 0 ) );
   }
