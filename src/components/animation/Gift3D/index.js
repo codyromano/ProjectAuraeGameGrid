@@ -8,8 +8,10 @@ import {
   WebGLRenderer,
   TextureLoader,
   BoxBufferGeometry,
-  MeshBasicMaterial,
-  Mesh
+  MeshPhongMaterial,
+  Mesh,
+  Vector3,
+  SpotLight
 } from 'three';
 
 export default class Gift3D extends React.Component {
@@ -86,11 +88,27 @@ export default class Gift3D extends React.Component {
   createGiftModel() {
     const texture = new TextureLoader().load(this.props.textureSrc);
     const geometry = new BoxBufferGeometry( 125, 125, 125 );
-    const material = new MeshBasicMaterial( { map: texture } );
+    const material = new MeshPhongMaterial( { map: texture } );
 
     this.mesh = new Mesh(geometry, material);
     this.mesh.position.z = -150;
     this.scene.add(this.mesh);
+
+    const spotLight = new SpotLight( 0xffffff );
+    spotLight.position.set( 200, 100, 200 );
+
+    spotLight.castShadow = true;
+
+    spotLight.shadow.mapSize.width = 1024 * 2;
+    spotLight.shadow.mapSize.height = 1024 * 2;
+
+    spotLight.shadow.camera.near = 500;
+    spotLight.shadow.camera.far = 7000;
+    spotLight.shadow.camera.fov = 20;
+
+    this.scene.add(spotLight);
+
+    this.camera.lookAt( new Vector3( 0, 0, 0 ) );
   }
   onSwipeLeft(event) {
     this.props.onSwipe(event);
