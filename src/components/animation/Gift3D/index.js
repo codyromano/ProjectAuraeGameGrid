@@ -88,7 +88,7 @@ export default class Gift3D extends React.Component {
   }
   addSpotlight() {
     const spotLight = new SpotLight( 0xffffff );
-    spotLight.position.set( 300, 300, 200 );
+    spotLight.position.set( 500, 500, 200 );
 
     spotLight.castShadow = true;
 
@@ -107,7 +107,7 @@ export default class Gift3D extends React.Component {
     const material = new MeshPhongMaterial( { map: texture } );
 
     this.mesh = new Mesh(geometry, material);
-    this.mesh.position.z = -150;
+    this.mesh.position.z = -100;
     this.scene.add(this.mesh);
 
     this.addSpotlight();

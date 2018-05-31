@@ -12,7 +12,10 @@ const TabWithNotices = (props) => {
   if (props.totalUnreadNotices) {
     extraClasses.root = 'selectedLabel';
   }
-  const chip = <Chip classes={extraClasses} label={props.totalUnreadNotices}/>;
+  let chip = <span></span>;
+  if (props.totalUnreadNotices) {
+    chip = <Chip classes={extraClasses} label={props.totalUnreadNotices}/>;
+  }
   const componentProps = pick(props,
     ['value', 'id', 'label', 'pathname', 'onChange', 'fullWidth']);
 
