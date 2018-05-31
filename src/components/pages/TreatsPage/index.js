@@ -5,7 +5,7 @@ import { userSawResources } from 'aurae-store/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import NewTreats from './NewTreats';
-import Grid from 'material-ui/Grid';
+import UnlockedTreats from './UnlockedTreats';
 
 class TreatsPage extends React.Component {
   componentDidMount() {
@@ -22,14 +22,7 @@ class TreatsPage extends React.Component {
     return (
       <PageWidthContainer>
         {lockedTreats.length > 0 && <NewTreats treats={lockedTreats} />}
-
-        <Grid container>
-          {unlockedTreats.map(treat => (
-            <Grid item key={treat.id}>
-              <span>{treat.title}</span>
-            </Grid>
-          ))}
-        </Grid>
+        {unlockedTreats.length > 0 && <UnlockedTreats treats={unlockedTreats} />}
       </PageWidthContainer>
     );
   }

@@ -103,8 +103,8 @@ class GiftContainer extends React.Component {
           physics={cubePhysics}
           onSwipe={this.onSwipe}
           onMaxRotationSpeed={this.onRewardUnlocked}
-          pixelWidth={125}
-          pixelHeight={125}
+          pixelWidth={300}
+          pixelHeight={300}
           {...this.props}
         />)}
         <Dialog open={this.state.maxRotation && !this.state.modalDismissed}>

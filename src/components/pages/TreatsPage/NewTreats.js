@@ -7,9 +7,9 @@ import Gift3DContainer from 'aurae-components/animation/Gift3DContainer';
 const NewTreats = ({ treats }) => (
   <Grid container>
     <Grid item xs={12}>
-      <h2>New treats</h2>
+      <h2>New treat!</h2>
     </Grid>
-    {treats.map(treat => (
+    {treats.slice(0,1).map(treat => (
       <Grid item key={treat.id}>
         <Gift3DContainer treat={treat} />
       </Grid>
