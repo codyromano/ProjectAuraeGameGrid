@@ -44,6 +44,9 @@ export const currencyResourceAcquired = (name, addAmount) => ({
   }
 });
 
+// TODO: This should be an async action creator that
+// retrieves treat data from an API, requiring authorization
+
 export const treatResourceAcquired = ({
   imageThumbSrc,
   title,
@@ -52,6 +55,10 @@ export const treatResourceAcquired = ({
   type: RESOURCE_ACQUIRED,
   class: CLASS_TREAT,
   resource: {
+    // TODO: Hardcoded for now because this will be replaced
+    // by the API statement above
+    rarityCode: 'rare',
+    rarityDescriptor: 'Rare',
     imageThumbSrc,
     title,
     description

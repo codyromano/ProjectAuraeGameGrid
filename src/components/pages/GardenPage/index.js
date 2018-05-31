@@ -21,8 +21,6 @@ class GardenPage extends React.Component {
     super(props);
     this.onGridTileSelected = this.onGridTileSelected.bind(this);
     this.redirector = routerRedirector(props.history);
-
-    console.log(props.location.pathname);
   }
   onGridTileSelected(coords) {
     const resources = this.props.getGameObjectsInPosition(coords);

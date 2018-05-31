@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog, {
   DialogTitle,
   DialogContent,
@@ -18,6 +19,12 @@ const createAudio = (src, loop = false) => {
 
 export default class GiftContainer extends React.Component {
   static onSwipeSFXPlaybackRateStep = 0.025;
+  static propTypes = {
+    treat: PropTypes.shape({
+      rarityDescriptor: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired
+    }).isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -94,7 +101,7 @@ export default class GiftContainer extends React.Component {
         />)}
         <Dialog open={this.state.maxRotation && !this.state.modalDismissed}>
           <DialogTitle>
-            Rare Treat Unlocked
+            {this.props.treat.rarityDescriptor} Treat: {this.props.treat.title}
           </DialogTitle>
           <DialogContent>
             <div
