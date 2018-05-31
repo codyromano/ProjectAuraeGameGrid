@@ -119,11 +119,11 @@ export default class Gift3D extends React.Component {
   }
   onSwipeLeft(event) {
     this.props.onSwipe(event);
-    this.swipeDirection -= 0.1;
+    this.swipeDirection -= 0.25;
   }
   onSwipeRight(event) {
     this.props.onSwipe(event);
-    this.swipeDirection += 0.1;
+    this.swipeDirection += 0.25;
   }
 
   animate() {

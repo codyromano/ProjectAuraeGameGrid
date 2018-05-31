@@ -41,7 +41,6 @@ class ManageResourcePage extends React.Component {
   }
   onHarvest() {
     const treat = {
-      imageThumbSrc: '#',
       title: 'Foo',
       description: 'Bar'
     };

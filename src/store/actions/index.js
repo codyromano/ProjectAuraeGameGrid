@@ -47,21 +47,15 @@ export const currencyResourceAcquired = (name, addAmount) => ({
 // TODO: This should be an async action creator that
 // retrieves treat data from an API, requiring authorization
 
-export const treatResourceAcquired = ({
-  imageThumbSrc,
-  title,
-  description
-}) => ({
+export const treatResourceAcquired = () => ({
   type: RESOURCE_ACQUIRED,
   class: CLASS_TREAT,
   resource: {
-    // TODO: Hardcoded for now because this will be replaced
-    // by the API statement above
     rarityCode: 'rare',
     rarityDescriptor: 'Rare',
-    imageThumbSrc,
-    title,
-    description,
+    imageSrc: 'https://media-cdn.tripadvisor.com/media/photo-s/06/18/1a/1c/voxx-coffee.jpg',
+    title: 'Free 8oz coffee at Voxx',
+    description: `Enjoy a small cup of coffee at your neighborhood Voxx Coffee shop.`,
     stats: {
       unlocked: false
     }

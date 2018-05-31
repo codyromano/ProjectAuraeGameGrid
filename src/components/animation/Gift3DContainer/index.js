@@ -116,7 +116,7 @@ class GiftContainer extends React.Component {
               className="treat-featured-image"
               alt="Reward unlocked"
               style={{
-                backgroundImage: `url(https://media-cdn.tripadvisor.com/media/photo-s/06/18/1a/1c/voxx-coffee.jpg)`
+                backgroundImage: `url(${this.props.treat.imageSrc})`
               }}
             />
             <DialogContentText>
