@@ -6,9 +6,12 @@ import Dialog, {
   DialogContentText,
   DialogActions,
 } from 'material-ui/Dialog';
+import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import Gift3D from 'aurae-components/animation/Gift3D';
 import './Gift3DContainer.css';
+import { resourceStatChanged, STAT_OPERATOR_SET } from 'aurae-store/actions';
+import { treatShape } from 'aurae-components/commonShapes';
 
 const createAudio = (src, loop = false) => {
   const audio = document.createElement('audio');
@@ -17,13 +20,10 @@ const createAudio = (src, loop = false) => {
   return audio;
 };
 
-export default class GiftContainer extends React.Component {
+class GiftContainer extends React.Component {
   static onSwipeSFXPlaybackRateStep = 0.025;
   static propTypes = {
-    treat: PropTypes.shape({
-      rarityDescriptor: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired
-    }).isRequired
+    treat: treatShape.isRequired
   };
 
   constructor(props) {
@@ -40,6 +40,8 @@ export default class GiftContainer extends React.Component {
     this.onRewardUnlocked = this.onRewardUnlocked.bind(this);
     this.hideModal = this.hideModal.bind(this);
 
+    this.mounted = true;
+
     const S3_BUCKET = 'https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/sound-effects';
     this.soundEffects = {
       whoosh: createAudio(`${S3_BUCKET}/whoosh-sound-effect.mp3`),
@@ -50,6 +52,7 @@ export default class GiftContainer extends React.Component {
     this.setState({
       modalDismissed: true
     });
+    this.props.markTreatAsUnlocked(this.props.treat.id);
   }
   componentDidMount() {
     this.turnVolumeDown = window.setInterval(() => {
@@ -57,6 +60,9 @@ export default class GiftContainer extends React.Component {
         volume: Math.max(0, this.state.volume - 0.025)
       })
     }, 100);
+  }
+  componentWillUnmount() {
+    this.mounted = false;
   }
   componentWillUpdate() {
     this.soundEffects.whoosh.volume = this.state.volume;
@@ -73,11 +79,13 @@ export default class GiftContainer extends React.Component {
     event.preventDefault();
     this.soundEffects.whoosh.play();
 
-    this.setState({
-      swipeSFXPlaybackRate: this.state.swipeSFXPlaybackRate +
-        GiftContainer.onSwipeSFXPlaybackRateStep,
-      volume: Math.min(1, this.state.volume + 0.20)
-    });
+    if (this.mounted) {
+      this.setState({
+        swipeSFXPlaybackRate: this.state.swipeSFXPlaybackRate +
+          GiftContainer.onSwipeSFXPlaybackRateStep,
+        volume: Math.min(1, this.state.volume + 0.20)
+      });
+    }
   }
   render() {
     const cubePhysics = {
@@ -128,3 +136,19 @@ export default class GiftContainer extends React.Component {
     );
   }
 }
+
+/*
+const decreaseWaterResource = actions.resourceStatChanged(
+  'water', 'amount', actions.WATER_AMOUNT, actions.STAT_OPERATOR_SUBTRACT
+);
+*/
+const mapDispatchToProps = (dispatch) => ({
+  markTreatAsUnlocked: (resourceId) => {
+    const action = resourceStatChanged(
+      resourceId, 'unlocked', true, STAT_OPERATOR_SET
+    );
+    dispatch(action);
+  }
+});
+
+export default connect(null, mapDispatchToProps)(GiftContainer);

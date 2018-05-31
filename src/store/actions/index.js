@@ -61,7 +61,10 @@ export const treatResourceAcquired = ({
     rarityDescriptor: 'Rare',
     imageThumbSrc,
     title,
-    description
+    description,
+    stats: {
+      unlocked: false
+    }
   }
 });
 
