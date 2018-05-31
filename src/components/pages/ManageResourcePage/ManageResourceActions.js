@@ -75,8 +75,8 @@ const ManageResourceActions = ({
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <p>This will <strong>permanently</strong> remove the {resource.title} from your garden.
-          You may be rewarded with a <strong>treat</strong>.</p>
+          <span>This will <strong>permanently</strong> remove the {resource.title} from your garden.
+          You may be rewarded with a <strong>treat</strong>.</span>
         </DialogContentText>
       </DialogContent>
       <DialogActions>

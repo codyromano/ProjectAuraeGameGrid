@@ -150,12 +150,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(decreaseWaterResource);
   },
   onHarvest: (resourceId, treat) => {
-    dispatch(
-      actions.resourceDeleted(resourceId)
-    );
-    dispatch(
-      actions.treatResourceAcquired(treat)
-    );
+    dispatch( actions.resourceDeleted(resourceId) );
+    dispatch( actions.treatResourceAcquired(treat) );
   },
   evolveResource: (resource, coords, treat) => {
     dispatch(

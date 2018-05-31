@@ -16,7 +16,7 @@ class TreatsPage extends React.Component {
     <PageWidthContainer>
       <Grid container>
         {this.props.treats.map(treat => (
-          <Grid item key={treat.title}>
+          <Grid item key={treat.id}>
             <Gift3DContainer treat={treat} />
           </Grid>
         ))}
