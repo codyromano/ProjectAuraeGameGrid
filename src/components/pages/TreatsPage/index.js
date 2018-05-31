@@ -15,6 +15,7 @@ class TreatsPage extends React.Component {
   render = () => (
     <PageWidthContainer>
       <Grid container>
+      <Gift3DContainer textureSrc={"https://s3-us-west-2.amazonaws.com/codyromano/project-aurae/texture/wrapping-paper.jpg"}/>
         {this.props.treats.map(treat => (
           <Grid item key={treat.title}>
             <Gift3DContainer />
